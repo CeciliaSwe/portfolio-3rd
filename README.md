@@ -4,7 +4,7 @@
 
 ## Design
 
-[Code Logic Flow Chart]()
+![Code Logic Flow Chart](assets/images/flowchart-p3.png)
 
 
 ### Goals
