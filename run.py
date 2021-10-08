@@ -70,7 +70,7 @@ def add_new_staff(data):
         deadline_date = calc_deadline(new_date)
 
         first_new_row = []
-        first_new_row.extend((new_fname, new_lname, new_role))
+        first_new_row.extend((new_fname, new_lname, new_role, deadline_date))
         second_new_row = first_new_row.copy()
         third_new_row = first_new_row.copy()
         first_new_row.append("CV")
@@ -101,12 +101,14 @@ def calc_deadline(date):
     Converts user input datestring to datetime using strptime method
     Calculates new deadline 15 days ahead using timedelta
     """
-
     date_time_str = date
     date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
     deadline_date = date_time_obj + timedelta(15)
+    deadline_date_string = deadline_date.strftime("%Y-%m-%d")
+    
     print(deadline_date)
-    return deadline_date
+    print(deadline_date_string)
+    return deadline_date_string
     
     
 
