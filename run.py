@@ -1,5 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import datetime
+from datetime import timedelta
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -12,7 +14,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("doc_tracking")
 
-print("Welcome to Document Status Tracking!")
+
 
 
 def user_choice():
@@ -63,6 +65,10 @@ def add_new_staff(data):
         print(f"Please enter new user role:\n")
         print(f"Enter as follows: PI/Sub-I/SC\n")
         new_role = input("Role \n")
+        
+        new_date = add_new_date()
+        deadline_date = calc_deadline(new_date)
+
         first_new_row = []
         first_new_row.extend((new_fname, new_lname, new_role))
         second_new_row = first_new_row.copy()
@@ -78,6 +84,35 @@ def add_new_staff(data):
     print(all_new_rows)
     return all_new_rows
 
+def add_new_date():
+    """
+    Request user to provide start date in specific format
+    Returns the date provided
+    """
+    print(f"Please enter start date:\n")
+    print(f"Use date format YYYY-MM-DD:\n")
+    print(f"Example 2021-10-07:\n")
+    new_date = input("Date \n")
+    return new_date
+
+
+def calc_deadline(date):
+    """
+    Converts user input datestring to datetime using strptime method
+    Calculates new deadline 15 days ahead using timedelta
+    """
+
+    date_time_str = date
+    date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
+    deadline_date = date_time_obj + timedelta(15)
+    print(deadline_date)
+    return deadline_date
+    
+    
+
+
+
+
 
 def update_doc_rows(data, worksheet):
     """
@@ -90,9 +125,11 @@ def update_doc_rows(data, worksheet):
         worksheet_to_update.append_row(row)
     print(f"{worksheet} worksheet updated!\n")
 
+print("Welcome to Document Status Tracking!")
 
 user_input = user_choice()
 all_new_rows = add_new_staff(user_input)
 update_doc_rows(all_new_rows, "doc_collection")
+
 
 
