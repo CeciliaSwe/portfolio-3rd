@@ -10,7 +10,7 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('doc_tracking')
+SHEET = GSPREAD_CLIENT.open("doc_tracking")
 
 print("Welcome to Document Status Tracking!")
 
@@ -79,5 +79,20 @@ def add_new_staff(data):
     return all_new_rows
 
 
+def update_doc_rows(data, worksheet):
+    """
+    Receives a list of lists with staff data to be inserted into a worksheet
+    Update the relevant worksheet with the data provided
+    """
+    print(f"Adding staff and documents to {worksheet} worksheet...\n")
+    for row in all_new_rows:
+        worksheet_to_update = SHEET.worksheet(worksheet)
+        worksheet_to_update.append_row(row)
+    print(f"{worksheet} worksheet updated!\n")
+
+
 user_input = user_choice()
 all_new_rows = add_new_staff(user_input)
+update_doc_rows(all_new_rows, "doc_collection")
+
+
