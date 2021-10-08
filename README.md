@@ -28,9 +28,12 @@
 - [GitHub](https://github.com/)
 - [Git](https://gitforwindows.org/)
 - [Heroku](https://heroku.com)
-- [Lucidcharts]()
+- [Lucidcharts](https://www.lucidchart.com/)
 
 ## Bugs & Fixes
+
+
+- Calculated deadline could not be inserted in worksheet, solved by converting the date back to string format before insertion (https://github.com/burnash/gspread/issues/511)
 
 ## Testing
 
