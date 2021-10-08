@@ -15,8 +15,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("doc_tracking")
 
 
-
-
 def user_choice():
     """
     Request the user to choose an action to perform from new, status and update
@@ -65,24 +63,24 @@ def add_new_staff(data):
         print(f"Please enter new user role:\n")
         print(f"Enter as follows: PI/Sub-I/SC\n")
         new_role = input("Role \n")
-        
         new_date = add_new_date()
         deadline_date = calc_deadline(new_date)
 
         first_new_row = []
-        first_new_row.extend((new_fname, new_lname, new_role, deadline_date))
+        first_new_row.extend((new_fname, new_lname, new_role, deadline_date, "Planned"))
         second_new_row = first_new_row.copy()
         third_new_row = first_new_row.copy()
         first_new_row.append("CV")
         second_new_row.append("GCP Certificate")
 
     if new_role == "PI" or new_role == "Sub-I":
-        third_new_row.append("Financial Disclosure")  
+        third_new_row.append("Financial Disclosure")
     elif new_role == "SC":
         third_new_row.append("IATA Certificate")
     all_new_rows = [first_new_row, second_new_row, third_new_row]
     print(all_new_rows)
     return all_new_rows
+
 
 def add_new_date():
     """
@@ -105,15 +103,9 @@ def calc_deadline(date):
     date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
     deadline_date = date_time_obj + timedelta(15)
     deadline_date_string = deadline_date.strftime("%Y-%m-%d")
-    
     print(deadline_date)
     print(deadline_date_string)
     return deadline_date_string
-    
-    
-
-
-
 
 
 def update_doc_rows(data, worksheet):
@@ -127,11 +119,27 @@ def update_doc_rows(data, worksheet):
         worksheet_to_update.append_row(row)
     print(f"{worksheet} worksheet updated!\n")
 
+
+def filter_by_role():
+    all_rows = SHEET.worksheet("doc_collection").get_all_values()
+    print([i for i, lst in enumerate(all_rows) if "SC" in lst])
+
+# e.g.: find the index of the list containing 12
+# This returns the first match (i.e. using index 0), if you want all matches
+# simply remove the `[0]`
+
+    #rows_sc = [x for x in all_rows if 'SC' in x]
+    #rows_pi = [x for x in all_rows if 'PI' in x]
+    #rows_subi = [x for x in all_rows if 'Sub-I' in x]
+
+    #cell = SHEET.worksheet("doc_collection").find("SC") #Find a cell with exact string value
+    #print("Text found at R%sC%s" % (cell.row, cell.col))
+    
+
+
 print("Welcome to Document Status Tracking!")
 
-user_input = user_choice()
-all_new_rows = add_new_staff(user_input)
-update_doc_rows(all_new_rows, "doc_collection")
-
-
-
+#user_input = user_choice()
+#all_new_rows = add_new_staff(user_input)
+#update_doc_rows(all_new_rows, "doc_collection")
+filter_by_role()
