@@ -17,7 +17,9 @@ print("Welcome to Document Status Tracking!")
 
 def user_choice():
     """
-    Request the user to choose between new, status and update
+    Request the user to choose an action to perform between new, status and update
+    Calls function to validate the user input
+    Returns variable user_inout with the chosen action
     """
     while True:
         print("What would you like to do?\n")
@@ -29,7 +31,30 @@ def user_choice():
 
     return user_input
 
-user_choice()
+def validate_user_choice(input):
+    """
+    Inside the try, run a series of if statements to check user input
+    Raises ValueError if strings do not match the given options.
+    """
+    try:
+        if input == "update":
+            print(f"You picked {input}")
+        elif input == "new":
+            print(f"You picked {input}")
+        elif input == "status":
+            print(f"You picked {input}")
+        else:
+            raise ValueError(
+                f"You need to pick one of the given options"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
+
+
+user_input = user_choice()
 
 
 
