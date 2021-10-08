@@ -17,7 +17,7 @@ print("Welcome to Document Status Tracking!")
 
 def user_choice():
     """
-    Request the user to choose an action to perform between new, status and update
+    Request the user to choose an action to perform from new, status and update
     Calls function to validate the user input
     Returns variable user_inout with the chosen action
     """
@@ -30,6 +30,7 @@ def user_choice():
             break
 
     return user_input
+
 
 def validate_user_choice(input):
     """
@@ -54,7 +55,29 @@ def validate_user_choice(input):
     return True
 
 
+def add_new_staff(data):
+    if data == "new":
+        print(f"Please enter new user name:\n")
+        new_fname = input("First name \n")
+        new_lname = input("Last name \n")
+        print(f"Please enter new user role:\n")
+        print(f"Enter as follows: PI/Sub-I/SC\n")
+        new_role = input("Role \n")
+        first_new_row = []
+        first_new_row.extend((new_fname, new_lname, new_role))
+        second_new_row = first_new_row.copy()
+        third_new_row = first_new_row.copy()
+        first_new_row.append("CV")
+        second_new_row.append("GCP Certificate")
+
+    if new_role == "PI" or new_role == "Sub-I":
+        third_new_row.append("Financial Disclosure")  
+    elif new_role == "SC":
+        third_new_row.append("IATA Certificate")
+    all_new_rows = [first_new_row, second_new_row, third_new_row]
+    print(all_new_rows)
+    return all_new_rows
+
+
 user_input = user_choice()
-
-
-
+all_new_rows = add_new_staff(user_input)
