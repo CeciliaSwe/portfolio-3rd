@@ -122,7 +122,13 @@ def update_doc_rows(data, worksheet):
 
 def filter_by_role():
     all_rows = SHEET.worksheet("doc_collection").get_all_values()
-    print([i for i, lst in enumerate(all_rows) if "SC" in lst])
+    index = 1
+    for row in all_rows:
+        row.append(index)
+        index = index + 1
+    
+    print(all_rows)
+    #print([i for i, lst in enumerate(all_rows) if "SC" in lst])
 
 # e.g.: find the index of the list containing 12
 # This returns the first match (i.e. using index 0), if you want all matches
