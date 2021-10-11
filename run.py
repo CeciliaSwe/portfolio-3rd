@@ -40,6 +40,7 @@ def validate_user_choice(input):
     try:
         if input == "update":
             print(f"You picked {input}")
+            request_update_by()
         elif input == "new":
             print(f"You picked {input}")
         elif input == "status":
@@ -120,33 +121,34 @@ def update_doc_rows(data, worksheet):
     print(f"{worksheet} worksheet updated!\n")
 
 
-def update_doc_status(data):
+def request_update_by():
+    
+    print(f"Please chose filter for update:\n")
+    print(f"By role, by deadline or list all\n")
+    update_filter = input("role/deadline/all \n")
+    print(f"You picked {update_filter}")
+    return update_filter
+    
+def filter_by_role(data):
     """
     Requests user to choose how to filter the available list
     by role, by deadline or all rows
     Returns chosen list including the row index to be updated
     """
-    if data == "update":
-        print("Indicate how you want the list filtered")
-        doc_filter = input("enter one of the following: role/deadline/all \n")
-        if doc_filter == "role":
-            all_rows = filter_by_role()
-            print("Enter applicable role")
-            role = input("PI/Sub-I/SC \n")
-            if role == "SC":
-                rows_sc = [x for x in all_rows if 'SC' in x]
+    
+    all_rows = add_row_number()
+    if update_filter == "SC":
+        filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
+        print(filtered_list_sc)
 
 
-        
-
-
-def filter_by_role():
+def add_row_number():
     all_rows = SHEET.worksheet("doc_collection").get_all_values()
     index = 1
     for row in all_rows:
         row.append(index)
         index = index + 1
-    print(all_rows)
+    return all_rows
    
 
     #rows_sc = [x for x in all_rows if 'SC' in x]
@@ -162,7 +164,11 @@ def filter_by_role():
 print("Welcome to Document Status Tracking!")
 
 user_input = user_choice()
+
+#request_update_by()
 #all_new_rows = add_new_staff(user_input)
 #update_doc_rows(all_new_rows, "doc_collection")
-update_doc_status(user_input)
+#update_doc_status(user_input)
 #filter_by_role()
+
+
