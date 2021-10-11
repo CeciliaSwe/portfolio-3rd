@@ -120,19 +120,34 @@ def update_doc_rows(data, worksheet):
     print(f"{worksheet} worksheet updated!\n")
 
 
+def update_doc_status(data):
+    """
+    Requests user to choose how to filter the available list
+    by role, by deadline or all rows
+    Returns chosen list including the row index to be updated
+    """
+    if data == "update":
+        print("Indicate how you want the list filtered")
+        doc_filter = input("enter one of the following: role/deadline/all \n")
+        if doc_filter == "role":
+            all_rows = filter_by_role()
+            print("Enter applicable role")
+            role = input("PI/Sub-I/SC \n")
+            if role == "SC":
+                rows_sc = [x for x in all_rows if 'SC' in x]
+
+
+        
+
+
 def filter_by_role():
     all_rows = SHEET.worksheet("doc_collection").get_all_values()
     index = 1
     for row in all_rows:
         row.append(index)
         index = index + 1
-    
     print(all_rows)
-    #print([i for i, lst in enumerate(all_rows) if "SC" in lst])
-
-# e.g.: find the index of the list containing 12
-# This returns the first match (i.e. using index 0), if you want all matches
-# simply remove the `[0]`
+   
 
     #rows_sc = [x for x in all_rows if 'SC' in x]
     #rows_pi = [x for x in all_rows if 'PI' in x]
@@ -143,9 +158,11 @@ def filter_by_role():
     
 
 
+
 print("Welcome to Document Status Tracking!")
 
-#user_input = user_choice()
+user_input = user_choice()
 #all_new_rows = add_new_staff(user_input)
 #update_doc_rows(all_new_rows, "doc_collection")
-filter_by_role()
+update_doc_status(user_input)
+#filter_by_role()
