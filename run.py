@@ -109,7 +109,7 @@ def calc_deadline(date):
     return deadline_date_string
 
 
-def update_doc_rows(data, worksheet):
+def add_doc_rows(data, worksheet):
     """
     Receives a list of lists with staff data to be inserted into a worksheet
     Update the relevant worksheet with the data provided
@@ -138,9 +138,9 @@ def request_update_role():
     
 def print_list():
     """
-    Requests user to choose how to filter the available list
-    by role, by deadline or all rows
-    Returns chosen list including the row index to be updated
+    Calls and uses return values from request_update_role function and
+    add_row_numbers function.
+    Returns chosen filtered list including the row index to be updated
     """
     all_rows = add_row_number()
     update_role = request_update_role()
@@ -173,11 +173,21 @@ def add_row_number():
         index = index + 1
     return all_rows
    
-    
+
+def update_doc_status(worksheet):
+    print("What row number is to be update?")
+    print("Row number is indicated last in the row") 
+    row_number = input("Row number:\n")
+    print("Add new document status as requested /sent/ complete")
+    new_status = input("New status:\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.update_cell(row_number, 5, new_status)
+    print(f"{worksheet} worksheet updated with new document status!\n")
 
 
 
 print("Welcome to Document Status Tracking!")
+update_doc_status("doc_collection")
 #request_update_by()
 #request_update_role()
 #role_filter = print_list()
@@ -187,12 +197,12 @@ print("Welcome to Document Status Tracking!")
 #user_input = user_choice_task()
 #request_update_by()
 #all_new_rows = create_rows(user_input)
-#update_doc_rows(all_new_rows, "doc_collection")
+#add_doc_rows(all_new_rows, "doc_collection")
 #update_doc_status(user_input)
 #filter_by_role()
 #all_rows = add_row_number()
 #print(all_rows)
-print_list()
+#print_list()
 #print(filtered_list_sc)
 
 
