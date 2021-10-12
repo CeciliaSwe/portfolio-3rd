@@ -175,13 +175,22 @@ def add_row_number():
    
 
 def update_doc_status(worksheet):
+    """
+    Request user input on what row to update and new document status
+    Updates corresponding row and column 5 with new status
+    """
     print("What row number is to be update?")
     print("Row number is indicated last in the row") 
     row_number = input("Row number:\n")
     print("Add new document status as requested /sent/ complete")
     new_status = input("New status:\n")
+    print("Enter new status date as YYYY-MM-DD:")
+    print("For example 2021-10-22")
+    new_date = input("New date:\n")
+    new_deadline = calc_deadline(new_date)
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.update_cell(row_number, 5, new_status)
+    worksheet_to_update.update_cell(row_number, 4, new_deadline)
     print(f"{worksheet} worksheet updated with new document status!\n")
 
 
