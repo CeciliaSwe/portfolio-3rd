@@ -15,11 +15,11 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("doc_tracking")
 
 
-def user_choice():
+def user_choice_task():
     """
     Request the user to choose an action to perform from new, status and update
     Calls function to validate the user input
-    Returns variable user_inout with the chosen action
+    Returns variable user_input with the chosen action
     """
     while True:
         print("What would you like to do?\n")
@@ -56,7 +56,7 @@ def validate_user_choice(input):
     return True
 
 
-def add_new_staff(data):
+def create_rows(data):
     if data == "new":
         print(f"Please enter new user name:\n")
         new_fname = input("First name \n")
@@ -128,21 +128,35 @@ def request_update_by():
     update_filter = input("role/deadline/all \n")
     print(f"You picked {update_filter}")
     return update_filter
+
+def request_update_role():
+    print(f"Please chose role update:\n")
+    update_role = input("PI/Sub-I/SC \n")
+    print(f"You picked {update_role}")
+    return update_role
+
     
-def filter_by_role(data):
+def print_list():
     """
     Requests user to choose how to filter the available list
     by role, by deadline or all rows
     Returns chosen list including the row index to be updated
     """
-    
     all_rows = add_row_number()
-    if update_filter == "SC":
+    update_role = request_update_role()
+    print(update_role)
+    if update_role == "SC":
         filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
         print(filtered_list_sc)
-
+        return filtered_list_sc
+        
 
 def add_row_number():
+    """
+    Pulls all rows from the doc collection worksheet
+    Iterates through the list of lists, appending an increasing row 
+    number to the end of each list, returns a full list of lists
+    """
     all_rows = SHEET.worksheet("doc_collection").get_all_values()
     index = 1
     for row in all_rows:
@@ -150,25 +164,27 @@ def add_row_number():
         index = index + 1
     return all_rows
    
-
-    #rows_sc = [x for x in all_rows if 'SC' in x]
-    #rows_pi = [x for x in all_rows if 'PI' in x]
-    #rows_subi = [x for x in all_rows if 'Sub-I' in x]
-
-    #cell = SHEET.worksheet("doc_collection").find("SC") #Find a cell with exact string value
-    #print("Text found at R%sC%s" % (cell.row, cell.col))
     
 
 
 
 print("Welcome to Document Status Tracking!")
-
-user_input = user_choice()
-
 #request_update_by()
-#all_new_rows = add_new_staff(user_input)
+#request_update_role()
+#role_filter = print_list()
+#filter_by_role(role_filter)
+
+#filter_by_role()
+#user_input = user_choice_task()
+#request_update_by()
+#all_new_rows = create_rows(user_input)
 #update_doc_rows(all_new_rows, "doc_collection")
 #update_doc_status(user_input)
 #filter_by_role()
+#all_rows = add_row_number()
+#print(all_rows)
+print_list()
+#print(filtered_list_sc)
+
 
 
