@@ -199,7 +199,7 @@ def add_row_number():
     all_rows = SHEET.worksheet("doc_collection").get_all_values()
     index = 1
     for row in all_rows:
-        row.append(index)
+        row.append(f"Row # {index}")
         index = index + 1
     return all_rows
    
