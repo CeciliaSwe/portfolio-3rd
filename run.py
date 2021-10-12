@@ -161,10 +161,11 @@ def print_list_role():
 
 def print_list_deadline():
     """
-    Creates a list of date strings from the worksheet, converts string into dates
+    Creates a new list of date strings from the worksheet, converts string into dates
     Calculates the date difference from deadline date to today and returns new list
     of difference in days
-    Appends the date difference in days back to the full list
+    Appends the date difference in days back to the full list and returns list
+    sorted by days to deadline
 
     """
     all_rows = add_row_number()
@@ -183,11 +184,13 @@ def print_list_deadline():
 
     i = 0
     for row in all_rows[1:]:
-        row.append(f"Deadline in {diff_days[i]} days")
+        row.append(diff_days[i])
         i = i + 1
-        
-    print(all_rows)
-    return all_rows
+
+    sorted_rows = sorted(all_rows[1:], key=lambda x: x[7])
+    print(sorted_rows)
+     
+    update_doc_status("doc_collection")
 
 
 def add_row_number():
@@ -207,7 +210,8 @@ def add_row_number():
 def update_doc_status(worksheet):
     """
     Request user input on what row to update and new document status
-    Updates corresponding row and column 5 with new status
+    Updates corresponding row and column 5 with new status 
+    and new calculated deadline
     """
     print("What row number is to be update?")
     print("Row number is indicated last in the row") 
