@@ -129,14 +129,15 @@ def request_update_by():
     print(f"You picked {update_filter}")
     return update_filter
 
+
 def request_update_role():
     print(f"Please chose role update:\n")
     update_role = input("PI/Sub-I/SC \n")
     print(f"You picked {update_role}")
     return update_role
 
-    
-def print_list():
+  
+def print_list_role():
     """
     Calls and uses return values from request_update_role function and
     add_row_numbers function.
@@ -157,8 +158,37 @@ def print_list():
         filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
         print(filtered_list_subi)
         return filtered_list_subi
+
+def print_list_deadline():
+    """
+    Creates a list of date strings from the worksheet, converts string into dates
+    Calculates the date difference from deadline date to today and returns new list
+    of difference in days
+    Appends the date difference in days back to the full list
+
+    """
+    all_rows = add_row_number()
+    date_list = []
+    for row in all_rows[1:]:
+        date_list.append(row[3])
+   
+
+    converted_date_list = [datetime.datetime.strptime(date, '%Y-%m-%d').date() for date in date_list]
+    diff_days = []
+    today = datetime.date.today()
+    for date in converted_date_list:
+        diff = date - today
+        diff_days.append(diff.days)
     
+
+    i = 0
+    for row in all_rows[1:]:
+        row.append(f"Deadline in {diff_days[i]} days")
+        i = i + 1
         
+    print(all_rows)
+    return all_rows
+
 
 def add_row_number():
     """
@@ -196,12 +226,12 @@ def update_doc_status(worksheet):
 
 
 print("Welcome to Document Status Tracking!")
-update_doc_status("doc_collection")
+#update_doc_status("doc_collection")
 #request_update_by()
 #request_update_role()
 #role_filter = print_list()
 #filter_by_role(role_filter)
-
+print_list_deadline()
 #filter_by_role()
 #user_input = user_choice_task()
 #request_update_by()
@@ -211,7 +241,7 @@ update_doc_status("doc_collection")
 #filter_by_role()
 #all_rows = add_row_number()
 #print(all_rows)
-#print_list()
+#print_list_role()
 #print(filtered_list_sc)
 
 
