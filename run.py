@@ -149,6 +149,15 @@ def print_list():
         filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
         print(filtered_list_sc)
         return filtered_list_sc
+    elif update_role == "PI":
+        filtered_list_pi = list(filter(lambda x: "PI" in x, all_rows))
+        print(filtered_list_pi)
+        return filtered_list_pi
+    elif update_role == "Sub-I":
+        filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
+        print(filtered_list_subi)
+        return filtered_list_subi
+    
         
 
 def add_row_number():
