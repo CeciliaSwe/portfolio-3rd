@@ -2,6 +2,9 @@
 
 ## Intro
 
+The live site can be found [here](https://portfolio-3rd.herokuapp.com/)
+
+
 ## Design
 
 ![Code Logic Flow Chart](assets/images/flowchart-p3.png)
