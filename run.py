@@ -1,7 +1,9 @@
-import gspread
-from google.oauth2.service_account import Credentials
 import datetime
 from datetime import timedelta
+import gspread
+from google.oauth2.service_account import Credentials
+
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -47,7 +49,7 @@ def validate_user_choice(input):
             print(f"You picked {input}")
         else:
             raise ValueError(
-                f"You need to pick one of the given options"
+                "You need to pick one of the given options"
             )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
@@ -80,7 +82,6 @@ def create_rows():
     all_new_rows = [first_new_row, second_new_row, third_new_row]
     print(all_new_rows)
     return all_new_rows
-    
 
 
 def add_new_date():
@@ -135,7 +136,7 @@ def request_update_role():
     print(f"You picked {update_role}")
     return update_role
 
-  
+
 def print_list_role():
     """
     Calls and uses return values from request_update_role function and
@@ -158,10 +159,12 @@ def print_list_role():
         print(filtered_list_subi)
         return filtered_list_subi
 
+
 def print_list_deadline():
     """
-    Creates a new list of date strings from the worksheet, converts string into dates
-    Calculates the date difference from deadline date to today and returns new list
+    Creates a new list of date strings from the worksheet 
+    Converts string into dates
+    Calculates the date difference from deadline to today and returns new list
     of difference in days
     Appends the date difference in days back to the full list and returns list
     sorted by days to deadline
@@ -172,7 +175,6 @@ def print_list_deadline():
     for row in all_rows[1:]:
         date_list.append(row[3])
    
-
     converted_date_list = [datetime.datetime.strptime(date, '%Y-%m-%d').date() for date in date_list]
     diff_days = []
     today = datetime.date.today()
@@ -180,7 +182,6 @@ def print_list_deadline():
         diff = date - today
         diff_days.append(diff.days)
     
-
     i = 0
     for row in all_rows[1:]:
         row.append(diff_days[i])
@@ -227,9 +228,13 @@ def update_doc_status(worksheet):
     print(f"{worksheet} worksheet updated with new document status!\n")
 
 
-
 print("Welcome to Document Status Tracking!")
+
+
 def main():
+    """
+    Runs the program
+    """
     user_input = user_choice_task()
     if user_input == "new":
         all_new_rows = create_rows()
@@ -249,24 +254,4 @@ def main():
     
 
 main()
-
-#update_doc_status("doc_collection")
-#request_update_by()
-#request_update_role()
-#role_filter = print_list()
-#filter_by_role(role_filter)
-#print_list_deadline()
-#filter_by_role()
-
-#request_update_by()
-#
-#
-#update_doc_status(user_input)
-#filter_by_role()
-#all_rows = add_row_number()
-#print(all_rows)
-#print_list_role()
-#print(filtered_list_sc)
-
-
 
