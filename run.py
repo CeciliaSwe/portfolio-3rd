@@ -42,7 +42,6 @@ def validate_user_choice(input):
     try:
         if input == "update":
             print(f"You picked {input}")
-            request_update_by()
         elif input == "new":
             print(f"You picked {input}")
         elif input == "status":
@@ -80,7 +79,7 @@ def create_rows():
     elif new_role == "SC":
         third_new_row.append("IATA Certificate")
     all_new_rows = [first_new_row, second_new_row, third_new_row]
-    print(all_new_rows)
+    print(f"Following rows are added to worksheet {all_new_rows}")
     return all_new_rows
 
 
@@ -105,8 +104,7 @@ def calc_deadline(date):
     date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
     deadline_date = date_time_obj + timedelta(15)
     deadline_date_string = deadline_date.strftime("%Y-%m-%d")
-    print(deadline_date)
-    print(deadline_date_string)
+    print(f"Your new deadline for follow up is {deadline_date_string}")
     return deadline_date_string
 
 
@@ -126,7 +124,7 @@ def request_update_by():
     print(f"Please chose filter for update:\n")
     print(f"By role, by deadline or list all\n")
     update_filter = input("role/deadline/all \n")
-    print(f"You picked {update_filter}")
+    print(f"You picked {update_filter}, a filtered list will show")
     return update_filter
 
 
@@ -233,7 +231,8 @@ print("Welcome to Document Status Tracking!")
 
 def main():
     """
-    Runs the program
+    Runs the program and functions depending on user
+    chioices and inputs
     """
     user_input = user_choice_task()
     if user_input == "new":
@@ -251,6 +250,7 @@ def main():
             print("List of all here")
     elif user_input == "status":
         print("Printed status here")
+        
     
 
 main()
