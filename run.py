@@ -56,23 +56,22 @@ def validate_user_choice(input):
     return True
 
 
-def create_rows(data):
-    if data == "new":
-        print(f"Please enter new user name:\n")
-        new_fname = input("First name \n")
-        new_lname = input("Last name \n")
-        print(f"Please enter new user role:\n")
-        print(f"Enter as follows: PI/Sub-I/SC\n")
-        new_role = input("Role \n")
-        new_date = add_new_date()
-        deadline_date = calc_deadline(new_date)
+def create_rows():
+    print(f"Please enter new user name:\n")
+    new_fname = input("First name \n")
+    new_lname = input("Last name \n")
+    print(f"Please enter new user role:\n")
+    print(f"Enter as follows: PI/Sub-I/SC\n")
+    new_role = input("Role \n")
+    new_date = add_new_date()
+    deadline_date = calc_deadline(new_date)
 
-        first_new_row = []
-        first_new_row.extend((new_fname, new_lname, new_role, deadline_date, "Planned"))
-        second_new_row = first_new_row.copy()
-        third_new_row = first_new_row.copy()
-        first_new_row.append("CV")
-        second_new_row.append("GCP Certificate")
+    first_new_row = []
+    first_new_row.extend((new_fname, new_lname, new_role, deadline_date, "Planned"))
+    second_new_row = first_new_row.copy()
+    third_new_row = first_new_row.copy()
+    first_new_row.append("CV")
+    second_new_row.append("GCP Certificate")
 
     if new_role == "PI" or new_role == "Sub-I":
         third_new_row.append("Financial Disclosure")
@@ -81,6 +80,7 @@ def create_rows(data):
     all_new_rows = [first_new_row, second_new_row, third_new_row]
     print(all_new_rows)
     return all_new_rows
+    
 
 
 def add_new_date():
@@ -115,14 +115,13 @@ def add_doc_rows(data, worksheet):
     Update the relevant worksheet with the data provided
     """
     print(f"Adding staff and documents to {worksheet} worksheet...\n")
-    for row in all_new_rows:
+    for row in data:
         worksheet_to_update = SHEET.worksheet(worksheet)
         worksheet_to_update.append_row(row)
     print(f"{worksheet} worksheet updated!\n")
 
 
 def request_update_by():
-    
     print(f"Please chose filter for update:\n")
     print(f"By role, by deadline or list all\n")
     update_filter = input("role/deadline/all \n")
@@ -230,17 +229,38 @@ def update_doc_status(worksheet):
 
 
 print("Welcome to Document Status Tracking!")
+def main():
+    user_input = user_choice_task()
+    if user_input == "new":
+        all_new_rows = create_rows()
+        add_doc_rows(all_new_rows, "doc_collection")
+    elif user_input == "update":
+        update_filter = request_update_by()
+        if update_filter == "role":
+            print_list_role()
+            update_doc_status("doc_collection")
+        elif update_filter == "deadline":
+            print_list_deadline()
+            update_doc_status("doc_collection")
+        elif update_filter == "all":
+            print("List of all here")
+    elif user_input == "status":
+        print("Printed status here")
+    
+
+main()
+
 #update_doc_status("doc_collection")
 #request_update_by()
 #request_update_role()
 #role_filter = print_list()
 #filter_by_role(role_filter)
-print_list_deadline()
+#print_list_deadline()
 #filter_by_role()
-#user_input = user_choice_task()
+
 #request_update_by()
-#all_new_rows = create_rows(user_input)
-#add_doc_rows(all_new_rows, "doc_collection")
+#
+#
 #update_doc_status(user_input)
 #filter_by_role()
 #all_rows = add_row_number()
