@@ -188,7 +188,6 @@ def print_list_deadline():
     sorted_rows = sorted(all_rows[1:], key=lambda x: x[7])
     print(sorted_rows)
      
-    update_doc_status("doc_collection")
 
 
 def add_row_number():
@@ -232,7 +231,7 @@ print("Welcome to Document Status Tracking!")
 def main():
     """
     Runs the program and functions depending on user
-    chioices and inputs
+    choices and inputs
     """
     user_input = user_choice_task()
     if user_input == "new":
@@ -252,6 +251,5 @@ def main():
         print("Printed status here")
         
     
-
 main()
 
