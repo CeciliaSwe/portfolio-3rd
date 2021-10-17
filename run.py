@@ -58,9 +58,15 @@ def validate_user_choice(input):
 
 
 def create_rows():
-    print(f"Please enter new user name:\n")
-    new_fname = input("First name \n")
-    new_lname = input("Last name \n")
+    while True:
+        print(f"Please enter new user name:\n")
+        new_fname = input("First name \n")
+        new_lname = input("Last name \n")
+        
+        if validate_name_input(new_fname, new_lname):
+            print("Thank you")
+            break
+
     print(f"Please enter new user role:\n")
     print(f"Enter as follows: PI/Sub-I/SC\n")
     new_role = input("Role \n")
@@ -81,6 +87,33 @@ def create_rows():
     all_new_rows = [first_new_row, second_new_row, third_new_row]
     print(f"Following rows are added to worksheet {all_new_rows}")
     return all_new_rows
+
+
+def validate_name_input(fname, lname):
+    try:
+        if fname.isalpha() and lname.isalpha():
+            print("Fname and lname letters only")
+        else:
+            raise ValueError(
+                "First name and last name must consist of letters only"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+        
+    try:
+        if (len(fname) >= 2 and len(fname) <= 15) and (len(lname) >= 2 and len(lname) <= 15):
+            print("Corrent length")
+        else:
+            raise ValueError(
+                "Name must be 2 - 15 characters long"
+            )
+    
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+       
+    return True
 
 
 def add_new_date():
@@ -234,8 +267,6 @@ def run_again():
     elif answer == "N":
         print("Bye, thank you, come again")
 
-print("Welcome to Document Status Tracking!")
-
 
 def main():
     """
@@ -262,7 +293,7 @@ def main():
 
 
         
-    
+print("Welcome to Document Status Tracking!")    
 main()
 
 
