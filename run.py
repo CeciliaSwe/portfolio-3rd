@@ -225,6 +225,15 @@ def update_doc_status(worksheet):
     print(f"{worksheet} worksheet updated with new document status!\n")
 
 
+def run_again():
+    print("Do you want to perform another task?")
+    answer = input("Y/N \n")
+
+    if answer == "Y":
+        main()
+    elif answer == "N":
+        print("Bye, thank you, come again")
+
 print("Welcome to Document Status Tracking!")
 
 
@@ -249,7 +258,11 @@ def main():
             print("List of all here")
     elif user_input == "status":
         print("Printed status here")
+    run_again()
+
+
         
     
 main()
+
 
