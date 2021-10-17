@@ -26,8 +26,9 @@ def user_choice_task():
     while True:
         print("What would you like to do?\n")
         user_input = input("Enter new/status/update: \n")
+        options = ["new", "status", "update"]
 
-        if validate_user_choice(user_input):
+        if validate_user_input(user_input, options):
             print("Thank you!")
             break
 
@@ -66,8 +67,9 @@ def create_rows():
         print(f"Please enter new user role:\n")
         print(f"Enter as follows: PI/Sub-I/SC\n")
         new_role = input("PI/Sub-I/SC\n")
+        options = ["PI", "Sub-I", "SC"]
 
-        if validate_role_input(new_role):
+        if validate_user_input(new_role, options):
             print("Thank you for providing role!")
             break
 
@@ -192,11 +194,46 @@ def add_doc_rows(data, worksheet):
 
 
 def request_update_by():
-    print(f"Please chose filter for update:\n")
-    print(f"By role, by deadline or list all\n")
-    update_filter = input("role/deadline/all \n")
-    print(f"You picked {update_filter}, a filtered list will show")
+    while True:
+        print(f"Please chose filter for update:\n")
+        print(f"By role, by deadline or list all\n")
+        update_filter = input("role/deadline/all \n")
+        options = ["deadline", "role", "all"]
+
+        if validate_user_input(update_filter, options):
+            break
     return update_filter
+
+
+def validate_user_input(user_input, options):
+    try:
+        if user_input in options:
+            print(f"Input {user_input} is validated")
+        else:
+            raise ValueError(
+                "You need to pick one of the given options"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
+
+    
+
+def validate_update_input(update_input):
+    try:
+        if update_input == "deadline" or update_input == "role" or update_input == "all":
+            print(f"You provided {update_input} as filter")
+        else:
+            raise ValueError(
+                "You need to pick one of the given options"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
 
 
 def request_update_role():
@@ -334,5 +371,6 @@ def main():
 print("Welcome to Document Status Tracking!")    
 main()
 #add_new_date()
+#request_update_by()
 
 
