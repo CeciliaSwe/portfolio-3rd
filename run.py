@@ -64,12 +64,17 @@ def create_rows():
         new_lname = input("Last name \n")
         
         if validate_name_input(new_fname, new_lname):
-            print("Thank you")
             break
 
-    print(f"Please enter new user role:\n")
-    print(f"Enter as follows: PI/Sub-I/SC\n")
-    new_role = input("Role \n")
+    while True:
+        print(f"Please enter new user role:\n")
+        print(f"Enter as follows: PI/Sub-I/SC\n")
+        new_role = input("PI/Sub-I/SC\n")
+
+        if validate_role_input(new_role):
+            print("Thank you for providing role!")
+            break
+
     new_date = add_new_date()
     deadline_date = calc_deadline(new_date)
 
@@ -84,6 +89,7 @@ def create_rows():
         third_new_row.append("Financial Disclosure")
     elif new_role == "SC":
         third_new_row.append("IATA Certificate")
+
     all_new_rows = [first_new_row, second_new_row, third_new_row]
     print(f"Following rows are added to worksheet {all_new_rows}")
     return all_new_rows
@@ -113,6 +119,21 @@ def validate_name_input(fname, lname):
         print(f"Invalid data: {e}, please try again.\n")
         return False
        
+    return True
+
+def validate_role_input(role):
+
+    try:
+        if role == "PI" or role == "Sub-I" or role == "SC":
+            print(f"You provided {role} as role")
+        else:
+            raise ValueError(
+                "You need to pick one of the given roles"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
     return True
 
 
