@@ -40,11 +40,7 @@ def validate_user_choice(input):
     Raises ValueError if strings do not match the given options.
     """
     try:
-        if input == "update":
-            print(f"You picked {input}")
-        elif input == "new":
-            print(f"You picked {input}")
-        elif input == "status":
+        if input == "update" or input == "new" or input == "status":
             print(f"You picked {input}")
         else:
             raise ValueError(
@@ -142,11 +138,32 @@ def add_new_date():
     Request user to provide start date in specific format
     Returns the date provided
     """
-    print(f"Please enter start date:\n")
-    print(f"Use date format YYYY-MM-DD:\n")
-    print(f"Example 2021-10-07:\n")
-    new_date = input("Date \n")
+    while True:
+        print(f"Please enter start date:\n")
+        print(f"Use date format YYYY-MM-DD:\n")
+        print(f"Example 2021-10-07:\n")
+        new_date = input("Date \n")
+
+        if validate_date_input(new_date):
+            print("Thank you for providing role!")
+            break
+        
     return new_date
+
+def validate_date_input(date):
+    """
+    Validated time input by comparing user provided date string with 
+    given format of YYYY-MM-DD. Raises error if not provided correctly. 
+    """
+
+    try:
+        if datetime.datetime.strptime(date, "%Y-%m-%d"):
+            print("This is the correct date string format.")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
 
 
 def calc_deadline(date):
@@ -316,5 +333,6 @@ def main():
         
 print("Welcome to Document Status Tracking!")    
 main()
+#add_new_date()
 
 
