@@ -112,8 +112,8 @@ def add_new_date():
         print(f"Example 2021-10-07:\n")
         new_date = input("Date \n")
 
-        if validate_date_input(new_date):
-            print("Thank you for providing role!")
+        if validate_date_input(new_date) and validate_time_delta(new_date):
+            print("Thank you for providing date!")
             break
         
     return new_date
@@ -269,7 +269,7 @@ def add_row_number():
         row.insert(0, f"Row # {index}")
         index = index + 1
     return all_rows
-   
+
 
 def update_doc_status(worksheet):
     """
@@ -282,17 +282,7 @@ def update_doc_status(worksheet):
     row_number = input("Row number:\n")
     print("Add new document status as requested /sent/ complete")
     new_status = input("New status:\n")
-    while True:
-        print("Enter new status date as YYYY-MM-DD:")
-        print("For example 2021-10-22")
-        new_date = input("New date:\n")
-
-        if validate_date_input(new_date):
-            print("Thank you for providing role!")
-            break
-        
-    return new_date
-
+    new_date = input_date()
     new_deadline = calc_deadline(new_date)
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.update_cell(row_number, 5, new_status)
@@ -333,11 +323,48 @@ def main():
         print("Printed status here")
     run_again()
 
+def validate_time_delta(date):
+    now = datetime.datetime.now()
+    print ("Current date:")
+    print (now.strftime("%Y-%m-%d"))
+    new = datetime.datetime.strptime(date, "%Y-%m-%d")
+
+    try:
+        if new < now + timedelta(-15):
+            print("Note! Date more than 15 days in past, deadline overdue")
+        elif new > now:
+            raise ValueError(
+                "Date cannot be in the future"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
+      
+def input_date():
+    while True:
+        print("Enter new status date as YYYY-MM-DD:")
+        print("For example 2021-10-22")
+        new_date = input("New date:\n")
+
+        if validate_date_input(new_date) and validate_time_delta(new_date):
+            
+            break
+        
+    return new_date
+
+  
+    
+
+    
+    
 
         
 print("Welcome to Document Status Tracking!")    
 main()
-#add_new_date()
-#request_update_by()
+
+
+
 
 
