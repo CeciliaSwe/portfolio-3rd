@@ -35,25 +35,6 @@ def user_choice_task():
     return user_input
 
 
-def validate_user_choice(input):
-    """
-    Inside the try, run a series of if statements to check user input
-    Raises ValueError if strings do not match the given options.
-    """
-    try:
-        if input == "update" or input == "new" or input == "status":
-            print(f"You picked {input}")
-        else:
-            raise ValueError(
-                "You need to pick one of the given options"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
-
-    return True
-
-
 def create_rows():
     while True:
         print(f"Please enter new user name:\n")
@@ -117,21 +98,6 @@ def validate_name_input(fname, lname):
         print(f"Invalid data: {e}, please try again.\n")
         return False
        
-    return True
-
-def validate_role_input(role):
-
-    try:
-        if role == "PI" or role == "Sub-I" or role == "SC":
-            print(f"You provided {role} as role")
-        else:
-            raise ValueError(
-                "You need to pick one of the given roles"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
-
     return True
 
 
@@ -219,22 +185,6 @@ def validate_user_input(user_input, options):
 
     return True
 
-    
-
-def validate_update_input(update_input):
-    try:
-        if update_input == "deadline" or update_input == "role" or update_input == "all":
-            print(f"You provided {update_input} as filter")
-        else:
-            raise ValueError(
-                "You need to pick one of the given options"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
-
-    return True
-
 
 def request_update_role():
     print(f"Please chose role update:\n")
@@ -254,15 +204,18 @@ def print_list_role():
     print(update_role)
     if update_role == "SC":
         filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
-        print(filtered_list_sc)
+        for row in filtered_list_sc:
+            print(*row)   
         return filtered_list_sc
     elif update_role == "PI":
         filtered_list_pi = list(filter(lambda x: "PI" in x, all_rows))
-        print(filtered_list_pi)
+        for row in filtered_list_pi:
+            print(*row)
         return filtered_list_pi
     elif update_role == "Sub-I":
         filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
-        print(filtered_list_subi)
+        for row in filtered_list_subi:
+            print(*row)
         return filtered_list_subi
 
 
@@ -297,17 +250,16 @@ def print_list_deadline():
     print(sorted_rows)
      
 
-
 def add_row_number():
     """
     Pulls all rows from the doc collection worksheet
     Iterates through the list of lists, appending an increasing row 
-    number to the end of each list, returns a full list of lists
+    number first in each list, returns a full list of lists
     """
     all_rows = SHEET.worksheet("doc_collection").get_all_values()
     index = 1
     for row in all_rows:
-        row.append(f"Row # {index}")
+        row.insert(0, f"Row # {index}")
         index = index + 1
     return all_rows
    
