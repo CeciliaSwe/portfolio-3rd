@@ -232,7 +232,7 @@ def print_list_deadline():
     all_rows = add_row_number()
     date_list = []
     for row in all_rows[1:]:
-        date_list.append(row[3])
+        date_list.append(row[4])
    
     converted_date_list = [datetime.datetime.strptime(date, '%Y-%m-%d').date() for date in date_list]
     diff_days = []
@@ -247,7 +247,8 @@ def print_list_deadline():
         i = i + 1
 
     sorted_rows = sorted(all_rows[1:], key=lambda x: x[7])
-    print(sorted_rows)
+    for row in sorted_rows:
+            print(*row) 
      
 
 def add_row_number():
@@ -271,7 +272,7 @@ def update_doc_status(worksheet):
     and new calculated deadline
     """
     print("What row number is to be update?")
-    print("Row number is indicated last in the row") 
+    print("Row number is indicated first in the row") 
     row_number = input("Row number:\n")
     print("Add new document status as requested /sent/ complete")
     new_status = input("New status:\n")
