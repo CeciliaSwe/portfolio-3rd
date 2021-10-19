@@ -187,8 +187,14 @@ def validate_user_input(user_input, options):
 
 
 def request_update_role():
-    print(f"Please chose role update:\n")
-    update_role = input("PI/Sub-I/SC \n")
+    while True:
+        print(f"Please chose role update:\n")
+        update_role = input("PI/Sub-I/SC \n")
+        options = ["PI", "Sub-I", "SC"]
+
+        if validate_user_input(update_role, options):
+            break
+    
     print(f"You picked {update_role}")
     return update_role
 
