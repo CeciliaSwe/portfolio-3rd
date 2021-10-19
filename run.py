@@ -276,9 +276,17 @@ def update_doc_status(worksheet):
     row_number = input("Row number:\n")
     print("Add new document status as requested /sent/ complete")
     new_status = input("New status:\n")
-    print("Enter new status date as YYYY-MM-DD:")
-    print("For example 2021-10-22")
-    new_date = input("New date:\n")
+    while True:
+        print("Enter new status date as YYYY-MM-DD:")
+        print("For example 2021-10-22")
+        new_date = input("New date:\n")
+
+        if validate_date_input(new_date):
+            print("Thank you for providing role!")
+            break
+        
+    return new_date
+
     new_deadline = calc_deadline(new_date)
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.update_cell(row_number, 5, new_status)
