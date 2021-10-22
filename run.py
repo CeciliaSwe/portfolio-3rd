@@ -50,7 +50,7 @@ def input_role():
     """
 
     while True:
-        print("Please select role:\n")
+        print("\nPlease select role:\n")
         print("1 : PI       Principal Investigator")
         print("2 : Sub-I    Sub-Investigator")
         print("3 : SC       Study Coordinator \n")
@@ -58,7 +58,6 @@ def input_role():
         new_role = input("Role: \n")
 
         if validate_user_input(new_role, options):
-            print("Thank you for providing role!")
             break
     
     if new_role == "1":
@@ -102,15 +101,16 @@ def create_rows():
         third_new_row.append("FDF")
     elif new_role == "SC":
         third_new_row.append("IATA")
-    print(third_new_row)
     all_new_rows = [first_new_row, second_new_row, third_new_row]
-    print("\nRows will be added to worksheet\n")
-    print(f"Following rows are added to worksheet {all_new_rows}")
+
+    print("Document status defaults to 'Planned'")
+    print("Following rows are added to worksheet:")
+    print(f"{tabulate(all_new_rows)}\n")
     print("Note abbreviations as follows:")
     print("CV = Curriculum Vitae")
     print("GCP = Good Clinical Practice certificate")
     print("FDF = Financial Disclosure Form")
-    print("IATA = IATA Certificate (for transporting blood samples\n")
+    print("IATA = IATA Certificate (for transporting blood samples)\n")
     return all_new_rows
 
 
@@ -122,13 +122,12 @@ def input_new_date():
     Returns the date string provided.
     """
     while True:
-        print(f"Please enter start date:\n")
-        print(f"Use date format YYYY-MM-DD:\n")
-        print(f"Example 2021-10-07:\n")
+        print("\nPlease enter start date:\n")
+        print("Use date format YYYY-MM-DD:")
+        print("For example 2021-10-22:\n")
         new_date = input("Date \n")
 
         if validate_date_input(new_date) and validate_time_delta(new_date):
-            print("Thank you for providing date!")
             break
         
     return new_date
@@ -144,7 +143,7 @@ def calc_deadline(date):
     date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
     deadline_date = date_time_obj + timedelta(15)
     deadline_date_string = deadline_date.strftime("%Y-%m-%d")
-    print(f"Your new deadline for follow up is {deadline_date_string}")
+    print(f"\nYour new deadline for follow up is {deadline_date_string}")
     return deadline_date_string
 
 
@@ -158,7 +157,7 @@ def add_doc_rows(data, worksheet):
     for row in data:
         worksheet_to_update = SHEET.worksheet(worksheet)
         worksheet_to_update.append_row(row)
-    print(f"{worksheet} worksheet updated!\n")
+    print(f"{worksheet} worksheet updated successfully!\n")
 
 
 def request_update_by():
@@ -225,7 +224,7 @@ def update_status_input():
         options = ["1", "2", "3"]
 
         if validate_user_input(new_status, options):
-            print("Thank you!")
+            print("Thank you!\n")
             break
     
     if new_status == "1":
@@ -394,7 +393,7 @@ def validate_name_input(fname, lname):
     """
     try:
         if fname.isalpha() and lname.isalpha():
-            print("Fname and lname letters only")
+            print("Names are valid")
         else:
             raise ValueError(
                 "First name and last name must consist of letters only"
@@ -405,7 +404,7 @@ def validate_name_input(fname, lname):
         
     try:
         if (len(fname) >= 2 and len(fname) <= 15) and (len(lname) >= 2 and len(lname) <= 15):
-            print("Corrent length")
+            print("Names are correct length")
         else:
             raise ValueError(
                 "Name must be 2 - 15 characters long"
@@ -426,7 +425,7 @@ def validate_date_input(date):
 
     try:
         if datetime.datetime.strptime(date, "%Y-%m-%d"):
-            print("This is the correct date string format.")
+            print("Thank you!")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
@@ -460,8 +459,6 @@ def validate_time_delta(date):
     has already passed.
     """
     now = datetime.datetime.now()
-    print ("Current date:")
-    print (now.strftime("%Y-%m-%d"))
     new = datetime.datetime.strptime(date, "%Y-%m-%d")
 
     try:
