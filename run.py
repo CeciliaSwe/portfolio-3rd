@@ -190,7 +190,7 @@ def request_update_role():
     """
     while True:
 
-        print("Please select role to update:\n")
+        print("\nPlease select role to update:\n")
         print("1 : PI       Principal Investigator")
         print("2 : Sub-I    Sub-Investigator")
         print("3 : SC       Study Coordinator\n")
@@ -199,8 +199,6 @@ def request_update_role():
 
         if validate_user_input(update_role, options):
             break
-    
-    print(f"You picked {update_role}")
     return update_role
 
 
@@ -249,18 +247,15 @@ def print_list_role():
     print(update_role)
     if update_role == "3":
         filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
-        for row in filtered_list_sc:
-            print(*row)   
+        print(tabulate(filtered_list_sc))  
         return filtered_list_sc
     elif update_role == "1":
         filtered_list_pi = list(filter(lambda x: "PI" in x, all_rows))
-        for row in filtered_list_pi:
-            print(*row)
+        print(tabulate(filtered_list_pi))
         return filtered_list_pi
     elif update_role == "2":
         filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
-        for row in filtered_list_subi:
-            print(*row)
+        print(tabulate(filtered_list_subi))
         return filtered_list_subi
     
 
@@ -337,6 +332,7 @@ def update_doc_status(worksheet):
     Request user input on what row to update and calls function for new document status.
     Updates corresponding row and columns 4 and 5 with new status and new calculated deadline.
     """
+    print("\nPlease select row number to update")
     row_number = input("Row number:\n")   
 
     new_status = update_status_input()
@@ -368,7 +364,6 @@ def run_again_input():
         if validate_user_input(answer, options):
             break
     
-    print(f"You picked {answer}")
     return answer
 
 
