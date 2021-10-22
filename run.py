@@ -1,5 +1,6 @@
 import datetime
 from datetime import timedelta
+from tabulate import tabulate
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -165,7 +166,7 @@ def request_update_by():
 
         print("Please chose filter:\n")
         print("1 : Role         Returns list filtered by selected role")
-        print("2 : Deadline     Returns list filtered by approaching deadline")
+        print("2 : Deadline     Returns list filtered by Deadline in less than 7 days")
         print("3 : All          Returns full list of rows in Document Tracking\n")
         options = ["1", "2", "3"]
         update_filter = input("Filter: \n")
@@ -277,6 +278,7 @@ def print_list_deadline():
     for row in sorted_rows:
             print(*row) 
 
+
 def list_all():
     """
     Creates a new list of date strings from the worksheet and converts string into dates
@@ -304,11 +306,15 @@ def list_all():
     
     return all_rows
 
+
 def print_all():
     all_rows = list_all()
+    
 
-    for row in all_rows:
-        print(*row) 
+    #for row in all_rows:
+        #print(*row) 
+
+    print(tabulate(all_rows))
 
 def add_row_number():
     """
