@@ -17,10 +17,11 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("doc_tracking")
 
 
-def user_choice_task():
+def input_action():
     """
-    Request the user to choose an action to perform from new, status and update
-    Calls function to validate the user input
+    Requests the user to choose an action to perform from new, status and update.
+    Calls function to validate the user input based on numbered options.
+    Uses a while loop to keep running until input is valid.
     Returns variable user_input with the chosen action
     """
     while True:
@@ -38,6 +39,13 @@ def user_choice_task():
 
 
 def create_rows():
+    """
+    Requests user input on name, role.
+    Calls function to input date.
+    Uses while loops to run until input is valid and calls functions to validate input.
+    Generates new rows in worksheet based on user input and pre-determined 
+    parameters for what documents are associated with a role.
+    """
     while True:
         print(f"Please enter new user name:\n")
         new_fname = input("First name \n")
@@ -59,7 +67,7 @@ def create_rows():
             print("Thank you for providing role!")
             break
 
-    new_date = add_new_date()
+    new_date = input_new_date()
     deadline_date = calc_deadline(new_date)
 
     first_new_row = []
@@ -79,37 +87,12 @@ def create_rows():
     return all_new_rows
 
 
-def validate_name_input(fname, lname):
-    try:
-        if fname.isalpha() and lname.isalpha():
-            print("Fname and lname letters only")
-        else:
-            raise ValueError(
-                "First name and last name must consist of letters only"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
-        
-    try:
-        if (len(fname) >= 2 and len(fname) <= 15) and (len(lname) >= 2 and len(lname) <= 15):
-            print("Corrent length")
-        else:
-            raise ValueError(
-                "Name must be 2 - 15 characters long"
-            )
-    
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
-       
-    return True
-
-
-def add_new_date():
+def input_new_date():
     """
-    Request user to provide start date in specific format
-    Returns the date provided
+    Request user to provide start date in specific format. 
+    Uses a while loop to keep running until input is valid. Calls validation function
+    for date input.
+    Returns the date string provided.
     """
     while True:
         print(f"Please enter start date:\n")
@@ -123,26 +106,12 @@ def add_new_date():
         
     return new_date
 
-def validate_date_input(date):
-    """
-    Validated time input by comparing user provided date string with 
-    given format of YYYY-MM-DD. Raises error if not provided correctly. 
-    """
-
-    try:
-        if datetime.datetime.strptime(date, "%Y-%m-%d"):
-            print("This is the correct date string format.")
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
-
-    return True
-
 
 def calc_deadline(date):
     """
-    Converts user input datestring to datetime using strptime method
-    Calculates new deadline 15 days ahead using timedelta
+    Converts user input date string to datetime using strptime method
+    Calculates new deadline 15 days ahead using timedelta and returns the
+    calculated deadline date converted back to a string.
     """
     date_time_str = date
     date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d')
@@ -155,7 +124,8 @@ def calc_deadline(date):
 def add_doc_rows(data, worksheet):
     """
     Receives a list of lists with staff data to be inserted into a worksheet
-    Update the relevant worksheet with the data provided
+    Updates the relevant worksheet with the data provided and prints out statement
+    to user with action taken and completed.
     """
     print(f"Adding staff and documents to {worksheet} worksheet...\n")
     for row in data:
@@ -165,6 +135,12 @@ def add_doc_rows(data, worksheet):
 
 
 def request_update_by():
+    """
+    Requests the user to choose a filter from role, deadline and all.
+    Calls function to validate the user input based on numbered options.
+    Uses a while loop to keep running until input is valid.
+    Returns variable update_filter with the chosen action
+    """
     while True:
 
         print("Please chose filter:\n")
@@ -179,22 +155,13 @@ def request_update_by():
     return update_filter
 
 
-def validate_user_input(user_input, options):
-    try:
-        if user_input in options:
-            print("Thank you!")
-        else:
-            raise ValueError(
-                "You need to pick one of the given options"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
-
-    return True
-
-
 def request_update_role():
+    """
+    Requests the user to choose what role to update.
+    Calls function to validate the user input based on numbered options.
+    Uses a while loop to keep running until input is valid.
+    Returns variable update_role.
+    """
     while True:
 
         print("Please select role to update:\n")
@@ -210,7 +177,16 @@ def request_update_role():
     print(f"You picked {update_role}")
     return update_role
 
+
 def update_status_input():
+
+    """
+    Requests the user to choose an updates document status from options.
+    Calls function to validate the user input based on numbered options.
+    Uses a while loop to keep running until input is valid.
+    Converts the numbered choice to a string and returns variable new_status 
+    with the string generated.
+    """
 
     while True:
         print("\nPlease indicate new document status:")
@@ -239,7 +215,8 @@ def print_list_role():
     """
     Calls and uses return values from request_update_role function and
     add_row_numbers function.
-    Returns chosen filtered list including the row index to be updated
+    Filters the list based on user choice and prints the list to the terminal.
+    
     """
     all_rows = add_row_number()
     update_role = request_update_role()
@@ -263,13 +240,11 @@ def print_list_role():
 
 def print_list_deadline():
     """
-    Creates a new list of date strings from the worksheet 
-    Converts string into dates
+    Creates a new list of date strings from the worksheet and converts string into dates
     Calculates the date difference from deadline to today and returns new list
-    of difference in days
-    Appends the date difference in days back to the full list and returns list
-    sorted by days to deadline
-
+    of difference in days.
+    Appends the date difference in days back to the full list and prints list
+    sorted by days to deadline to the terminal.
     """
     all_rows = add_row_number()
     date_list = []
@@ -295,9 +270,10 @@ def print_list_deadline():
 
 def add_row_number():
     """
-    Pulls all rows from the doc collection worksheet
+    Pulls all rows from the doc collection worksheet.
     Iterates through the list of lists, appending an increasing row 
-    number first in each list, returns a full list of lists
+    number first in each list, returns a full list of lists with corresponding
+    row numbers in the worksheet.
     """
     all_rows = SHEET.worksheet("doc_collection").get_all_values()
     index = 1
@@ -307,21 +283,16 @@ def add_row_number():
     return all_rows
 
 
-
-
 def update_doc_status(worksheet):
     """
-    Request user input on what row to update and new document status
-    Updates corresponding row and column 5 with new status 
-    and new calculated deadline
+    Request user input on what row to update and calls function for new document status.
+    Updates corresponding row and columns 4 and 5 with new status and new calculated deadline.
     """
-    
-    row_number = input("Row number:\n")
-        
+    row_number = input("Row number:\n")   
 
     new_status = update_status_input()
 
-    new_date = input_date()
+    new_date = input_new_date()
     new_deadline = calc_deadline(new_date)
     worksheet_to_update = SHEET.worksheet(worksheet)
     worksheet_to_update.update_cell(row_number, 5, new_status)
@@ -330,6 +301,13 @@ def update_doc_status(worksheet):
 
 
 def run_again_input():
+    """
+    Requests user to chose if they want to perform another action or stop running
+    the application. 
+    Calls function to validate that user input matched the given options.
+    Uses a while loop to keep running until input is valid. Accepts uppercase and lowercase
+    letters for Y/N. 
+    """
     while True:
         print("Do you want to perform another action?\n")
         options = ["Y", "y", "N", "n"]
@@ -341,7 +319,12 @@ def run_again_input():
     print(f"You picked {answer}")
     return answer
 
+
 def run_again():
+    """
+    Re-runs program if user wants to perform another task. 
+    Closes program with a message if user does not want to perform another task.
+    """
     answer = run_again_input()  
 
     if answer == "Y" or answer == "y":
@@ -350,30 +333,79 @@ def run_again():
         print("Bye, thank you, come again")
 
 
-def main():
+def validate_name_input(fname, lname):
     """
-    Runs the program and functions depending on user
-    choices and inputs
+    Validates first name and last name inputs. Names can be letters only
+    and must be between 2 and 15 charachters each for first name and last name
+    Generates error message for user to define the error made.
     """
-    user_input = user_choice_task()
-    if user_input == "1":
-        all_new_rows = create_rows()
-        add_doc_rows(all_new_rows, "doc_collection")
-    elif user_input == "2":
-        update_filter = request_update_by()
-        if update_filter == "1":
-            print_list_role()
-            update_doc_status("doc_collection")
-        elif update_filter == "2":
-            print_list_deadline()
-            update_doc_status("doc_collection")
-        elif update_filter == "3":
-            print("List of all here")
-    elif user_input == "3":
-        print("Printed status here")
-    run_again()
+    try:
+        if fname.isalpha() and lname.isalpha():
+            print("Fname and lname letters only")
+        else:
+            raise ValueError(
+                "First name and last name must consist of letters only"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+        
+    try:
+        if (len(fname) >= 2 and len(fname) <= 15) and (len(lname) >= 2 and len(lname) <= 15):
+            print("Corrent length")
+        else:
+            raise ValueError(
+                "Name must be 2 - 15 characters long"
+            )
+    
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+       
+    return True
+
+
+def validate_date_input(date):
+    """
+    Validates time input. Converts input date string to date and by compares with 
+    given format of YYYY-MM-DD. Raises error and error message if not provided correctly. 
+    """
+
+    try:
+        if datetime.datetime.strptime(date, "%Y-%m-%d"):
+            print("This is the correct date string format.")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
+
+
+def validate_user_input(user_input, options):
+    """
+    Validates user input from list of defined options. 
+    Generates error message if user input does not match given options.
+    """
+    try:
+        if user_input in options:
+            print("Thank you!")
+        else:
+            raise ValueError(
+                "You need to pick one of the given options"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
+
 
 def validate_time_delta(date):
+    """
+    Validates input dates. Raises error if date is in the future.
+    Prints a note/warning if input date is more than 15 days in the past and deadline
+    has already passed.
+    """
     now = datetime.datetime.now()
     print ("Current date:")
     print (now.strftime("%Y-%m-%d"))
@@ -391,59 +423,32 @@ def validate_time_delta(date):
         return False
 
     return True
-      
-def input_date():
-    while True:
-        print("Enter new status date as YYYY-MM-DD:")
-        print("For example 2021-10-22")
-        new_date = input("New date:\n")
 
-        if validate_date_input(new_date) and validate_time_delta(new_date):
-            
-            break
-        
-    return new_date
 
-#def validate_row():
-    row = input_row()
-    print(row)
-
-    try:
-        if row:
-            print("ok")
-        else:
-            raise ValueError(
-                "Chose a row from the list"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False
-
-    return True 
-    
-#def input_row(filtered_list_role):
-    list = filtered_list_role
-    row_no = input("row\n")
-
-    for list in lists:
-            if row_no in list[0]:
-                print("present")
-                row = True
-                return row
-            else:
-                print("no")
-                return False
-    
-    
+def main():
+    """
+    Runs the program and functions depending on user
+    choices and inputs
+    """
+    user_input = input_action()
+    if user_input == "1":
+        all_new_rows = create_rows()
+        add_doc_rows(all_new_rows, "doc_collection")
+    elif user_input == "2":
+        update_filter = request_update_by()
+        if update_filter == "1":
+            print_list_role()
+            update_doc_status("doc_collection")
+        elif update_filter == "2":
+            print_list_deadline()
+            update_doc_status("doc_collection")
+        elif update_filter == "3":
+            print("List of all here")
+    elif user_input == "3":
+        print("Printed status here")
+    run_again()
 
         
 print("Welcome to Document Status Tracking!")    
 main()
-#user_choice_task()
-#validate_row()
-#input_row()
-
-
-
-
 
