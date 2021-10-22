@@ -96,15 +96,20 @@ def create_rows():
     second_new_row = first_new_row.copy()
     third_new_row = first_new_row.copy()
     first_new_row.append("CV")
-    second_new_row.append("GCP Certificate")
+    second_new_row.append("GCP")
 
     if new_role == "1" or new_role == "2":
-        third_new_row.append("Financial Disclosure")
+        third_new_row.append("FDF")
     elif new_role == "3":
-        third_new_row.append("IATA Certificate")
+        third_new_row.append("IATA")
 
     all_new_rows = [first_new_row, second_new_row, third_new_row]
-    print(f"Following rows are added to worksheet {all_new_rows}")
+    print("\nRows will be added to worksheet\n")
+    print("Note abbreviations as follows:")
+    print("CV = Curriculum Vitae")
+    print("GCP = Good Clinical Practice certificate")
+    print("FDF = Financial Disclosure Form")
+    print("IATA = IATA Certificate (for transporting blood samples\n")
     return all_new_rows
 
 
@@ -309,10 +314,6 @@ def list_all():
 
 def print_all():
     all_rows = list_all()
-    
-
-    #for row in all_rows:
-        #print(*row) 
 
     print(tabulate(all_rows))
 
