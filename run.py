@@ -25,8 +25,8 @@ def user_choice_task():
     """
     while True:
         print("Please select action:\n")
-        print("1 : New      Add site staff details to generate rows in Document Tracking\n")
-        print("2 : Update   Update status of existing row in Document Tracking\n")
+        print("1 : New      Add site staff details to generate rows in Document Tracking")
+        print("2 : Update   Update status of existing row in Document Tracking")
         print("3 : Status   Print all existing rows with status in Document Tracking\n")
         user_input = input("Action: \n")
         options = ["1", "2", "3"]
@@ -48,10 +48,13 @@ def create_rows():
             break
 
     while True:
-        print(f"Please enter new user role:\n")
-        print(f"Enter as follows: PI/Sub-I/SC\n")
-        new_role = input("PI/Sub-I/SC\n")
-        options = ["PI", "Sub-I", "SC"]
+        print("Please select role:\n")
+        print("1 : PI       Principal Investigator")
+        print("2 : Sub-I    Sub-Investigator")
+        print("3 : SC       Study Coordinator \n")
+        options = ["1", "2", "3"]
+        new_role = input("Role: \n")
+        
 
         if validate_user_input(new_role, options):
             print("Thank you for providing role!")
@@ -67,9 +70,9 @@ def create_rows():
     first_new_row.append("CV")
     second_new_row.append("GCP Certificate")
 
-    if new_role == "PI" or new_role == "Sub-I":
+    if new_role == "1" or new_role == "2":
         third_new_row.append("Financial Disclosure")
-    elif new_role == "SC":
+    elif new_role == "3":
         third_new_row.append("IATA Certificate")
 
     all_new_rows = [first_new_row, second_new_row, third_new_row]
@@ -164,10 +167,13 @@ def add_doc_rows(data, worksheet):
 
 def request_update_by():
     while True:
-        print(f"Please chose filter for update:\n")
-        print(f"By role, by deadline or list all\n")
-        update_filter = input("role/deadline/all \n")
-        options = ["deadline", "role", "all"]
+
+        print("Please chose filter:\n")
+        print("1 : Role         Returns list filtered by selected role")
+        print("2 : Deadline     Returns list filtered by approaching deadline")
+        print("3 : All          Returns full list of rows in Document Tracking\n")
+        options = ["1", "2", "3"]
+        update_filter = input("Filter: \n")
 
         if validate_user_input(update_filter, options):
             break
@@ -191,9 +197,13 @@ def validate_user_input(user_input, options):
 
 def request_update_role():
     while True:
-        print(f"Please chose role update:\n")
-        update_role = input("PI/Sub-I/SC \n")
-        options = ["PI", "Sub-I", "SC"]
+
+        print("Please select role to update:\n")
+        print("1 : PI       Principal Investigator\n")
+        print("2 : Sub-I    Sub-Investigator\n")
+        print("3 : SC       Study Coordinator\n")
+        options = ["1", "2", "3"]
+        update_role = input("Role: n")
 
         if validate_user_input(update_role, options):
             break
@@ -211,17 +221,17 @@ def print_list_role():
     all_rows = add_row_number()
     update_role = request_update_role()
     print(update_role)
-    if update_role == "SC":
+    if update_role == "3":
         filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
         for row in filtered_list_sc:
             print(*row)   
         return filtered_list_sc
-    elif update_role == "PI":
+    elif update_role == "1":
         filtered_list_pi = list(filter(lambda x: "PI" in x, all_rows))
         for row in filtered_list_pi:
             print(*row)
         return filtered_list_pi
-    elif update_role == "Sub-I":
+    elif update_role == "2":
         filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
         for row in filtered_list_subi:
             print(*row)
@@ -314,13 +324,13 @@ def main():
         add_doc_rows(all_new_rows, "doc_collection")
     elif user_input == "2":
         update_filter = request_update_by()
-        if update_filter == "role":
+        if update_filter == "1":
             print_list_role()
             update_doc_status("doc_collection")
-        elif update_filter == "deadline":
+        elif update_filter == "2":
             print_list_deadline()
             update_doc_status("doc_collection")
-        elif update_filter == "all":
+        elif update_filter == "3":
             print("List of all here")
     elif user_input == "3":
         print("Printed status here")
