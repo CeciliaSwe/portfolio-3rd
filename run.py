@@ -73,8 +73,8 @@ def create_rows():
     """
     Requests user input on name, role and calls function to validate input.
     Uses while loop to run until input is valid
-    Calls function to input date.   
-    Generates new rows in worksheet based on user input and pre-determined. 
+    Calls function to input date.
+    Generates new rows in worksheet based on user input and pre-determined.
     parameters for what documents are associated with a role.
     """
     while True:
@@ -244,7 +244,7 @@ def print_list_role():
     print(update_role)
     if update_role == "3":
         filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
-        print(tabulate(filtered_list_sc))  
+        print(tabulate(filtered_list_sc))
         return filtered_list_sc
     elif update_role == "1":
         filtered_list_pi = list(filter(lambda x: "PI" in x, all_rows))
@@ -259,14 +259,14 @@ def print_list_role():
 def print_list_deadline():
     """
     Creates a new list of date strings from the worksheet and converts string
-    into dates. Calculates the date difference from deadline to today and returns new list
-    of difference in days.
+    into dates. Calculates the date difference from deadline to today and
+    returns new list of difference in days.
     Appends the date difference in days back to the full list.
     Filters list for deadline within 7 days or overdue and prints a sorts
     list to the terminal.
     """
     all_rows = list_all()
-        
+
     filtered_rows = []
     for row in all_rows[1:]:
         if row[7] <= 7:
@@ -274,22 +274,24 @@ def print_list_deadline():
 
     sorted_rows = sorted(filtered_rows, key=lambda x: x[7])
     for row in sorted_rows:
-        print(*row) 
+        print(*row)
 
 
 def list_all():
     """
-    Creates a new list of date strings from the worksheet and converts string into dates
+    Creates a new list of date strings from the worksheet and converts string
+    into dates.
     Calculates the date difference from deadline to today and returns new list
     of difference in days.
     Appends the date difference in days back to the full list.
-    Filters list for deadline within 7 days or overdue and prints a sortes list to the terminal.
+    Filters list for deadline within 7 days or overdue and prints a sorted list
+    to the terminal.
     """
     all_rows = add_row_number()
     date_list = []
     for row in all_rows[1:]:
         date_list.append(row[4])
-   
+
     converted_date_list = [datetime.datetime.strptime(date, '%Y-%m-%d').date() for date in date_list]
     diff_days = []
     today = datetime.date.today()
@@ -301,7 +303,7 @@ def list_all():
     for row in all_rows[1:]:
         row.append(diff_days[i])
         i = i + 1
-    
+
     return all_rows
 
 
@@ -310,10 +312,11 @@ def print_all():
 
     print(tabulate(all_rows))
 
+
 def add_row_number():
     """
     Pulls all rows from the doc collection worksheet.
-    Iterates through the list of lists, appending an increasing row 
+    Iterates through the list of lists, appending an increasing row
     number first in each list, returns a full list of lists with corresponding
     row numbers in the worksheet.
     """
@@ -332,7 +335,7 @@ def update_doc_status(worksheet):
     status and new calculated deadline.
     """
     print("\nPlease select row number to update")
-    row_number = input("Row number:\n")   
+    row_number = input("Row number:\n")
 
     new_status = update_status_input()
 
@@ -346,11 +349,11 @@ def update_doc_status(worksheet):
 
 def run_again_input():
     """
-    Requests user to chose if they want to perform another action or stop running
-    the application. 
+    Requests user to chose if they want to perform another action or stop
+    running the application.
     Calls function to validate that user input matched the given options.
-    Uses a while loop to keep running until input is valid. Accepts uppercase and lowercase
-    letters for Y/N. 
+    Uses a while loop to keep running until input is valid. Accepts uppercase
+    and lowercase letters for Y/N.
     """
     while True:
         print("Do you want to perform another action?\n")
@@ -359,16 +362,17 @@ def run_again_input():
 
         if validate_user_input(answer, options):
             break
- 
+
     return answer
 
 
 def run_again():
     """
-    Re-runs program if user wants to perform another task. 
-    Closes program with a message if user does not want to perform another task.
+    Re-runs program if user wants to perform another task.
+    Closes program with a message if user does not want to perform another
+    task.
     """
-    answer = run_again_input() 
+    answer = run_again_input()
 
     if answer == "Y" or answer == "y":
         main()
@@ -392,7 +396,7 @@ def validate_name_input(fname, lname):
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
-       
+
     try:
         if (len(fname) >= 2 and len(fname) <= 15) and (len(lname) >= 2 and len(lname) <= 15):
             print("Names are correct length")
@@ -400,19 +404,19 @@ def validate_name_input(fname, lname):
             raise ValueError(
                 "Name must be 2 - 15 characters long"
             )
-  
+
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
-    
+
     return True
 
 
 def validate_date_input(date):
     """
     Validates time input. Converts input date string to date and by compares
-    with given format of YYYY-MM-DD. Raises error and error message if not provided
-    correctly.
+    with given format of YYYY-MM-DD. Raises error and error message if not
+    provided correctly.
     """
 
     try:
@@ -427,7 +431,7 @@ def validate_date_input(date):
 
 def validate_user_input(user_input, options):
     """
-    Validates user input from list of defined options. 
+    Validates user input from list of defined options.
     Generates error message if user input does not match given options.
     """
     try:
@@ -486,12 +490,12 @@ def main():
             update_doc_status("doc_collection")
         elif update_filter == "3":
             print_all()
-            update_doc_status("doc_collection")           
+            update_doc_status("doc_collection")
     elif user_input == "3":
         print("Printed status here")
         print_all()
     run_again()
 
-    
-print("Welcome to Document Status Tracking!")    
+
+print("Welcome to Document Status Tracking!")
 main()
