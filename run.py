@@ -32,7 +32,6 @@ def user_choice_task():
         options = ["1", "2", "3"]
 
         if validate_user_input(user_input, options):
-            print("Thank you!")
             break
 
     return user_input
@@ -183,7 +182,7 @@ def request_update_by():
 def validate_user_input(user_input, options):
     try:
         if user_input in options:
-            print(f"Input {user_input} is validated")
+            print("Thank you!")
         else:
             raise ValueError(
                 "You need to pick one of the given options"
@@ -260,7 +259,7 @@ def print_list_role():
         for row in filtered_list_subi:
             print(*row)
         return filtered_list_subi
-
+    
 
 def print_list_deadline():
     """
@@ -308,15 +307,17 @@ def add_row_number():
     return all_rows
 
 
+
+
 def update_doc_status(worksheet):
     """
     Request user input on what row to update and new document status
     Updates corresponding row and column 5 with new status 
     and new calculated deadline
     """
-    print("\nWhat row number is to be update?")
-    print("Row number is indicated first in the row") 
+    
     row_number = input("Row number:\n")
+        
 
     new_status = update_status_input()
 
@@ -328,13 +329,24 @@ def update_doc_status(worksheet):
     print(f"{worksheet} worksheet updated with new document status!\n")
 
 
-def run_again():
-    print("Do you want to perform another task?")
-    answer = input("Y/N \n")
+def run_again_input():
+    while True:
+        print("Do you want to perform another action?\n")
+        options = ["Y", "y", "N", "n"]
+        answer = input("Y/N \n")
 
-    if answer == "Y":
+        if validate_user_input(answer, options):
+            break
+    
+    print(f"You picked {answer}")
+    return answer
+
+def run_again():
+    answer = run_again_input()  
+
+    if answer == "Y" or answer == "y":
         main()
-    elif answer == "N":
+    elif answer == "N" or answer == "n":
         print("Bye, thank you, come again")
 
 
@@ -392,9 +404,35 @@ def input_date():
         
     return new_date
 
-  
-    
+#def validate_row():
+    row = input_row()
+    print(row)
 
+    try:
+        if row:
+            print("ok")
+        else:
+            raise ValueError(
+                "Chose a row from the list"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True 
+    
+#def input_row(filtered_list_role):
+    list = filtered_list_role
+    row_no = input("row\n")
+
+    for list in lists:
+            if row_no in list[0]:
+                print("present")
+                row = True
+                return row
+            else:
+                print("no")
+                return False
     
     
 
@@ -402,6 +440,8 @@ def input_date():
 print("Welcome to Document Status Tracking!")    
 main()
 #user_choice_task()
+#validate_row()
+#input_row()
 
 
 
