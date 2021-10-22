@@ -24,9 +24,12 @@ def user_choice_task():
     Returns variable user_input with the chosen action
     """
     while True:
-        print("What would you like to do?\n")
-        user_input = input("Enter new/status/update: \n")
-        options = ["new", "status", "update"]
+        print("Please select action:\n")
+        print("1 : New      Add site staff details to generate rows in Document Tracking\n")
+        print("2 : Update   Update status of existing row in Document Tracking\n")
+        print("3 : Status   Print all existing rows with status in Document Tracking\n")
+        user_input = input("Action: \n")
+        options = ["1", "2", "3"]
 
         if validate_user_input(user_input, options):
             print("Thank you!")
@@ -306,10 +309,10 @@ def main():
     choices and inputs
     """
     user_input = user_choice_task()
-    if user_input == "new":
+    if user_input == "1":
         all_new_rows = create_rows()
         add_doc_rows(all_new_rows, "doc_collection")
-    elif user_input == "update":
+    elif user_input == "2":
         update_filter = request_update_by()
         if update_filter == "role":
             print_list_role()
@@ -319,7 +322,7 @@ def main():
             update_doc_status("doc_collection")
         elif update_filter == "all":
             print("List of all here")
-    elif user_input == "status":
+    elif user_input == "3":
         print("Printed status here")
     run_again()
 
@@ -363,6 +366,7 @@ def input_date():
         
 print("Welcome to Document Status Tracking!")    
 main()
+#user_choice_task()
 
 
 
