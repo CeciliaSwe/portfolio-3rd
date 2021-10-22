@@ -320,6 +320,12 @@ def update_doc_status(worksheet):
     print(f"{worksheet} worksheet updated with new document status!\n")
 
 
+def print_all():
+    all_rows = add_row_number()
+    for row in all_rows:
+            print(*row) 
+
+
 def run_again_input():
     """
     Requests user to chose if they want to perform another action or stop running
@@ -463,9 +469,11 @@ def main():
             print_list_deadline()
             update_doc_status("doc_collection")
         elif update_filter == "3":
-            print("List of all here")
+            print_all()
+            update_doc_status("doc_collection")           
     elif user_input == "3":
         print("Printed status here")
+        print_all()
     run_again()
 
         
