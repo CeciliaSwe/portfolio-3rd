@@ -38,6 +38,38 @@ def input_action():
     return user_input
 
 
+def input_role():
+
+    """
+    Requests the user to choose a role from options.
+    Calls function to validate the user input based on numbered options.
+    Uses a while loop to keep running until input is valid.
+    Converts the numbered choice to a string and returns variable new_role
+    with the string generated.
+    """
+
+    while True:
+        print("Please select role:\n")
+        print("1 : PI       Principal Investigator")
+        print("2 : Sub-I    Sub-Investigator")
+        print("3 : SC       Study Coordinator \n")
+        options = ["1", "2", "3"]
+        new_role = input("Role: \n")
+
+        if validate_user_input(new_role, options):
+            print("Thank you for providing role!")
+            break
+    
+    if new_role == "1":
+        new_role = "PI"
+    elif new_role == "2":
+        new_role = "Sub-I"
+    elif new_role == "3":
+        new_role = "SC"
+
+    return new_role
+
+
 def create_rows():
     """
     Requests user input on name, role.
@@ -54,19 +86,7 @@ def create_rows():
         if validate_name_input(new_fname, new_lname):
             break
 
-    while True:
-        print("Please select role:\n")
-        print("1 : PI       Principal Investigator")
-        print("2 : Sub-I    Sub-Investigator")
-        print("3 : SC       Study Coordinator \n")
-        options = ["1", "2", "3"]
-        new_role = input("Role: \n")
-        
-
-        if validate_user_input(new_role, options):
-            print("Thank you for providing role!")
-            break
-
+    new_role = input_role()
     new_date = input_new_date()
     deadline_date = calc_deadline(new_date)
 
