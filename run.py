@@ -263,8 +263,27 @@ def print_list_deadline():
     Creates a new list of date strings from the worksheet and converts string into dates
     Calculates the date difference from deadline to today and returns new list
     of difference in days.
-    Appends the date difference in days back to the full list and prints list
-    sorted by days to deadline to the terminal.
+    Appends the date difference in days back to the full list.
+    Filters list for deadline within 7 days or overdue and prints a sortes list to the terminal.
+    """
+    all_rows = list_all()
+        
+    filtered_rows = []
+    for row in all_rows[1:]:
+        if row[7] <= 7:
+            filtered_rows.append(row)
+
+    sorted_rows = sorted(filtered_rows, key=lambda x: x[7])
+    for row in sorted_rows:
+            print(*row) 
+
+def list_all():
+    """
+    Creates a new list of date strings from the worksheet and converts string into dates
+    Calculates the date difference from deadline to today and returns new list
+    of difference in days.
+    Appends the date difference in days back to the full list.
+    Filters list for deadline within 7 days or overdue and prints a sortes list to the terminal.
     """
     all_rows = add_row_number()
     date_list = []
@@ -277,16 +296,19 @@ def print_list_deadline():
     for date in converted_date_list:
         diff = date - today
         diff_days.append(diff.days)
-    
+
     i = 0
     for row in all_rows[1:]:
         row.append(diff_days[i])
         i = i + 1
+    
+    return all_rows
 
-    sorted_rows = sorted(all_rows[1:], key=lambda x: x[7])
-    for row in sorted_rows:
-            print(*row) 
-     
+def print_all():
+    all_rows = list_all()
+
+    for row in all_rows:
+        print(*row) 
 
 def add_row_number():
     """
@@ -320,10 +342,7 @@ def update_doc_status(worksheet):
     print(f"{worksheet} worksheet updated with new document status!\n")
 
 
-def print_all():
-    all_rows = add_row_number()
-    for row in all_rows:
-            print(*row) 
+
 
 
 def run_again_input():
