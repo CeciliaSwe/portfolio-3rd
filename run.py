@@ -98,13 +98,14 @@ def create_rows():
     first_new_row.append("CV")
     second_new_row.append("GCP")
 
-    if new_role == "1" or new_role == "2":
+    if new_role == "PI" or new_role == "Sub-I":
         third_new_row.append("FDF")
-    elif new_role == "3":
+    elif new_role == "SC":
         third_new_row.append("IATA")
-
+    print(third_new_row)
     all_new_rows = [first_new_row, second_new_row, third_new_row]
     print("\nRows will be added to worksheet\n")
+    print(f"Following rows are added to worksheet {all_new_rows}")
     print("Note abbreviations as follows:")
     print("CV = Curriculum Vitae")
     print("GCP = Good Clinical Practice certificate")
