@@ -199,17 +199,41 @@ def request_update_role():
     while True:
 
         print("Please select role to update:\n")
-        print("1 : PI       Principal Investigator\n")
-        print("2 : Sub-I    Sub-Investigator\n")
+        print("1 : PI       Principal Investigator")
+        print("2 : Sub-I    Sub-Investigator")
         print("3 : SC       Study Coordinator\n")
         options = ["1", "2", "3"]
-        update_role = input("Role: n")
+        update_role = input("Role: \n")
 
         if validate_user_input(update_role, options):
             break
     
     print(f"You picked {update_role}")
     return update_role
+
+def update_status_input():
+
+    while True:
+        print("\nPlease indicate new document status:")
+        print("Document default status is 'Planned':\n")
+        print("1 : Sent         Document template has been sent")
+        print("2 : Requested    Document has been requested")
+        print("3 : Complete     Completed document has been recevied \n")
+        new_status = input("New status: \n")
+        options = ["1", "2", "3"]
+
+        if validate_user_input(new_status, options):
+            print("Thank you!")
+            break
+    
+    if new_status == "1":
+        new_status = "Sent"
+    elif new_status == "2":
+        new_status = "Requested"
+    elif new_status == "3":
+        new_status = "Complete"
+
+    return new_status
 
 
 def print_list_role():
@@ -290,11 +314,12 @@ def update_doc_status(worksheet):
     Updates corresponding row and column 5 with new status 
     and new calculated deadline
     """
-    print("What row number is to be update?")
+    print("\nWhat row number is to be update?")
     print("Row number is indicated first in the row") 
     row_number = input("Row number:\n")
-    print("Add new document status as requested /sent/ complete")
-    new_status = input("New status:\n")
+
+    new_status = update_status_input()
+
     new_date = input_date()
     new_deadline = calc_deadline(new_date)
     worksheet_to_update = SHEET.worksheet(worksheet)
