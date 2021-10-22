@@ -5,7 +5,6 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -20,16 +19,16 @@ SHEET = GSPREAD_CLIENT.open("doc_tracking")
 
 def input_action():
     """
-    Requests the user to choose an action to perform from new, status and update.
-    Calls function to validate the user input based on numbered options.
+    Requests the user to choose an action to perform from options.
+    Calls function to validate user input based on numbered options.
     Uses a while loop to keep running until input is valid.
     Returns variable user_input with the chosen action
     """
     while True:
         print("Please select action:\n")
-        print("1 : New      Add site staff details to generate rows in Document Tracking")
-        print("2 : Update   Update status of existing row in Document Tracking")
-        print("3 : Status   Print all existing rows with status in Document Tracking\n")
+        print("1 : New      To generate new rows in Doc Tracking")
+        print("2 : Update   Update status of existing row in Doc Tracking")
+        print("3 : Status   Print existing rows with status in Doc Tracking\n")
         user_input = input("Action: \n")
         options = ["1", "2", "3"]
 
@@ -59,30 +58,30 @@ def input_role():
 
         if validate_user_input(new_role, options):
             break
-    
-    if new_role == "1":
-        new_role = "PI"
-    elif new_role == "2":
-        new_role = "Sub-I"
-    elif new_role == "3":
-        new_role = "SC"
+
+        if new_role == "1":
+            new_role = "PI"
+        elif new_role == "2":
+            new_role = "Sub-I"
+        elif new_role == "3":
+            new_role = "SC"
 
     return new_role
 
 
 def create_rows():
     """
-    Requests user input on name, role.
-    Calls function to input date.
-    Uses while loops to run until input is valid and calls functions to validate input.
-    Generates new rows in worksheet based on user input and pre-determined 
+    Requests user input on name, role and calls function to validate input.
+    Uses while loop to run until input is valid
+    Calls function to input date.   
+    Generates new rows in worksheet based on user input and pre-determined. 
     parameters for what documents are associated with a role.
     """
     while True:
-        print(f"Please enter new user name:\n")
+        print("Please enter new user name:\n")
         new_fname = input("First name \n")
         new_lname = input("Last name \n")
-        
+
         if validate_name_input(new_fname, new_lname):
             break
 
@@ -116,9 +115,9 @@ def create_rows():
 
 def input_new_date():
     """
-    Request user to provide start date in specific format. 
-    Uses a while loop to keep running until input is valid. Calls validation function
-    for date input.
+    Request user to provide start date in specific format.
+    Uses a while loop to keep running until input is valid. Calls validation
+    functions for date input.
     Returns the date string provided.
     """
     while True:
@@ -129,7 +128,6 @@ def input_new_date():
 
         if validate_date_input(new_date) and validate_time_delta(new_date):
             break
-        
     return new_date
 
 
@@ -150,8 +148,8 @@ def calc_deadline(date):
 def add_doc_rows(data, worksheet):
     """
     Receives a list of lists with staff data to be inserted into a worksheet
-    Updates the relevant worksheet with the data provided and prints out statement
-    to user with action taken and completed.
+    Updates the relevant worksheet with the data provided and prints out
+    statement to user with action taken and completed.
     """
     print(f"Adding staff and documents to {worksheet} worksheet...\n")
     for row in data:
@@ -171,8 +169,8 @@ def request_update_by():
 
         print("Please chose filter:\n")
         print("1 : Role         Returns list filtered by selected role")
-        print("2 : Deadline     Returns list filtered by Deadline in less than 7 days")
-        print("3 : All          Returns full list of rows in Document Tracking\n")
+        print("2 : Deadline     Returns list filtered by deadline < 7 days")
+        print("3 : All          Returns full list of rows in Doc Tracking\n")
         options = ["1", "2", "3"]
         update_filter = input("Filter: \n")
 
@@ -208,7 +206,7 @@ def update_status_input():
     Requests the user to choose an updates document status from options.
     Calls function to validate the user input based on numbered options.
     Uses a while loop to keep running until input is valid.
-    Converts the numbered choice to a string and returns variable new_status 
+    Converts the numbered choice to a string and returns variable new_status
     with the string generated.
     """
 
@@ -224,7 +222,7 @@ def update_status_input():
         if validate_user_input(new_status, options):
             print("Thank you!\n")
             break
-    
+
     if new_status == "1":
         new_status = "Sent"
     elif new_status == "2":
@@ -240,7 +238,6 @@ def print_list_role():
     Calls and uses return values from request_update_role function and
     add_row_numbers function.
     Filters the list based on user choice and prints the list to the terminal.
-    
     """
     all_rows = add_row_number()
     update_role = request_update_role()
@@ -257,15 +254,16 @@ def print_list_role():
         filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
         print(tabulate(filtered_list_subi))
         return filtered_list_subi
-    
+
 
 def print_list_deadline():
     """
-    Creates a new list of date strings from the worksheet and converts string into dates
-    Calculates the date difference from deadline to today and returns new list
+    Creates a new list of date strings from the worksheet and converts string
+    into dates. Calculates the date difference from deadline to today and returns new list
     of difference in days.
     Appends the date difference in days back to the full list.
-    Filters list for deadline within 7 days or overdue and prints a sortes list to the terminal.
+    Filters list for deadline within 7 days or overdue and prints a sorts
+    list to the terminal.
     """
     all_rows = list_all()
         
@@ -276,7 +274,7 @@ def print_list_deadline():
 
     sorted_rows = sorted(filtered_rows, key=lambda x: x[7])
     for row in sorted_rows:
-            print(*row) 
+        print(*row) 
 
 
 def list_all():
@@ -329,8 +327,9 @@ def add_row_number():
 
 def update_doc_status(worksheet):
     """
-    Request user input on what row to update and calls function for new document status.
-    Updates corresponding row and columns 4 and 5 with new status and new calculated deadline.
+    Request user input on what row to update and calls function for new
+    document status. Updates corresponding row and columns 4 and 5 with new
+    status and new calculated deadline.
     """
     print("\nPlease select row number to update")
     row_number = input("Row number:\n")   
@@ -343,9 +342,6 @@ def update_doc_status(worksheet):
     worksheet_to_update.update_cell(row_number, 5, new_status)
     worksheet_to_update.update_cell(row_number, 4, new_deadline)
     print(f"{worksheet} worksheet updated with new document status!\n")
-
-
-
 
 
 def run_again_input():
@@ -363,7 +359,7 @@ def run_again_input():
 
         if validate_user_input(answer, options):
             break
-    
+ 
     return answer
 
 
@@ -372,7 +368,7 @@ def run_again():
     Re-runs program if user wants to perform another task. 
     Closes program with a message if user does not want to perform another task.
     """
-    answer = run_again_input()  
+    answer = run_again_input() 
 
     if answer == "Y" or answer == "y":
         main()
@@ -396,7 +392,7 @@ def validate_name_input(fname, lname):
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
-        
+       
     try:
         if (len(fname) >= 2 and len(fname) <= 15) and (len(lname) >= 2 and len(lname) <= 15):
             print("Names are correct length")
@@ -404,18 +400,19 @@ def validate_name_input(fname, lname):
             raise ValueError(
                 "Name must be 2 - 15 characters long"
             )
-    
+  
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
-       
+    
     return True
 
 
 def validate_date_input(date):
     """
-    Validates time input. Converts input date string to date and by compares with 
-    given format of YYYY-MM-DD. Raises error and error message if not provided correctly. 
+    Validates time input. Converts input date string to date and by compares
+    with given format of YYYY-MM-DD. Raises error and error message if not provided
+    correctly.
     """
 
     try:
@@ -450,8 +447,8 @@ def validate_user_input(user_input, options):
 def validate_time_delta(date):
     """
     Validates input dates. Raises error if date is in the future.
-    Prints a note/warning if input date is more than 15 days in the past and deadline
-    has already passed.
+    Prints a note/warning if input date is more than 15 days in the past and
+    deadline has already passed.
     """
     now = datetime.datetime.now()
     new = datetime.datetime.strptime(date, "%Y-%m-%d")
@@ -495,7 +492,6 @@ def main():
         print_all()
     run_again()
 
-        
+    
 print("Welcome to Document Status Tracking!")    
 main()
-
