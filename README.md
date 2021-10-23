@@ -160,9 +160,9 @@ Other inspiration and tutoritals are credited as per below:
 - How to validate a date string [Date String Validation](https://www.kite.com/python/answers/how-to-validate-a-date-string-format-in-python)
 
 
-- How to calculate timedelta[Timedelta calculations](https://stackoverflow.com/questions/151199/how-to-calculate-number-of-days-between-two-given-dates)
+- How to calculate timedelta [Timedelta calculations](https://stackoverflow.com/questions/151199/how-to-calculate-number-of-days-between-two-given-dates)
 
-- How to convert dates to strings and vice versa [Datestring converstions](https://stackabuse.com/converting-strings-to-datetime-in-python/)
+- How to convert dates to strings and vice versa [Datestring convertions](https://stackabuse.com/converting-strings-to-datetime-in-python/)
 
 - While loop and user input validation:
     - The basis for the while loop for user input and the corresponding validation function were taken from the Love Sandwiches walkthrough project. All code has been customized for the indented purposes for this project.
