@@ -83,7 +83,6 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 ![Invalid]()
 
 ## Validation
-
 All code has been run through the [PEP8](http://pep8online.com) online checker to validate the Python code.
 
 ## Data model
@@ -111,15 +110,9 @@ All code has been run through the [PEP8](http://pep8online.com) online checker t
 
 
 ## Bugs & Fixes
-
-
 - Calculated deadline could not be inserted in worksheet, solved by converting the date back to string format before insertion (https://github.com/burnash/gspread/issues/511)
+- After updating user choice input to numbers (instead of typing out the role abbreviation) for choosing a role, the number was added to worksheet instead of the role. Solved by converting the role variable back to role abbreviation before adding it to the list to be inserted to the worksheet.
 
-## Testing
-
-### [TESTING SHEET]()
-
-### User testing feedback.
 
 ## Deployment
 
