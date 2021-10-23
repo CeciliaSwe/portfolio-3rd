@@ -82,6 +82,9 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 - Entering a character not matching the given options will prompt the user to pick one of the given options. Lower case letters y/n are accepted:
 ![Invalid]()
 
+## Validation
+
+All code has been run through the [PEP8](http://pep8online.com) online checker to validate the Python code.
 
 ## Data model
 
@@ -97,6 +100,15 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 - [Git](https://gitforwindows.org/)
 - [Heroku](https://heroku.com)
 - [Lucidcharts](https://www.lucidchart.com/)
+- [Google Cloud Platform](https://cloud.google.com/)
+- [Google Sheets](https://www.google.com/sheets/about/)
+- [GSpread API Reference](https://docs.gspread.org/en/latest/api.html)
+    - The API reference for the GSpread library for Python. It provides an easy interface for working with Google Sheets from code.
+- [Tabulate](https://pypi.org/project/tabulate/)
+- [Datetime](https://docs.python.org/3/search.html?q=datetime&check_keywords=yes&area=default)
+
+
+
 
 ## Bugs & Fixes
 
