@@ -59,6 +59,9 @@ The intended audience is anyone working with spreadsheet document tracking in cl
         - Result: The user can choose the option "Status" which prints a tabulated data to the terminal, giving an overview of the available data from the worksheet. The option "Update" also prints tabulated data based on user's preferred filter.
 
 ## Application Testing
+
+For testing, print statements were used heavily during the coding of the application. Once finished, every paths was navigated to ensure they gave the expected result and validation of each user input was working.
+
 - The menu input option checks for valid user input and prompts the user to input a valid choice if one is not entered:
     - Invalid number chosen:
     ![Invalid Data]()
@@ -148,6 +151,25 @@ All code has been run through the [PEP8](http://pep8online.com) online checker t
 
 ## Credits
 
-[Code Institute Template](https://github.com/Code-Institute-Org/python-essentials-template)
+All code has been custom written for this project, with the exception of the scope and constant variables (from the Love Sandwiches walkthrough project, as the Gspread set up was identical) and the basis for the while loop and user input validation (also from the Love Sandwiches walkthrough project, but customized for each function and purpose in this project).
+
+Other inspiration and tutoritals are credited as per below:
+
+- [Code Institute Template](https://github.com/Code-Institute-Org/python-essentials-template)
+
+- How to validate a date string [Date String Validation](https://www.kite.com/python/answers/how-to-validate-a-date-string-format-in-python)
+
+
+- How to calculate timedelta[Timedelta calculations](https://stackoverflow.com/questions/151199/how-to-calculate-number-of-days-between-two-given-dates)
+
+- How to convert dates to strings and vice versa [Datestring converstions](https://stackabuse.com/converting-strings-to-datetime-in-python/)
+
+- While loop and user input validation:
+    - The basis for the while loop for user input and the corresponding validation function were taken from the Love Sandwiches walkthrough project. All code has been customized for the indented purposes for this project.
+
+- Scope and constant variables:
+    - Scope and constant variables were taken from the Love Sandwiches walkthrough project as the Gspread set up was identical.
+
+
 
 
