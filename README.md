@@ -62,28 +62,25 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 
 For testing, print statements were used heavily during the coding of the application. Once finished, every paths was navigated to ensure they gave the expected result and validation of each user input was working.
 
-- The menu input option checks for valid user input and prompts the user to input a valid choice if one is not entered:
-    - Invalid number chosen:
-    ![Invalid Data]()
+- The menu input option checks for valid user input and prompts the user to input a valid choice if one is not entered
 
-- Entering user name containing symbols or numbers prompt user to enter an alphabetic name:
-![Invalid data]()
-- Entering user name less than 2 or more than 15 characters prompts the user to enter a name of valid length:
-![Invalid data]()
-- Selecting a number not corresponding to a role or entering a letter or symbol prompts user select one of the given options:
-![Invalid Data]()
-- Entering a start date that is in the future prompts the user to enter a valid start date:
-![Invalid Data]()
-- Entering a start date the is more than 15 days in the part (i.e. deadline has already passed) warns the user that deadline has passed but allowd the date to be entered:
-![Note!]()
-- Selecting a number not corresponding to a filter or entering a letter or symbol prompts user select one of the given options:
-![Invalid]()
-- Selecting a row which is not present in the list promts the user to select a valid row to update:
-![Invalid]()
-- Selecting a number not corresponding to a document status or entering a letter or symbol prompts user select one of the given options:
-![Invalid]()
-- Entering a character not matching the given options will prompt the user to pick one of the given options. Lower case letters y/n are accepted:
-![Invalid]()
+- Entering user name containing symbols or numbers prompt user to enter an alphabetic name.
+
+- Entering user name less than 2 or more than 15 characters prompts the user to enter a name of valid length.
+
+- Selecting a number not corresponding to a role or entering a letter or symbol prompts user select one of the given options.
+
+- Entering a start date that is in the future prompts the user to enter a valid start date.
+
+- Entering a start date the is more than 15 days in the part (i.e. deadline has already passed) warns the user that deadline has passed but allowd the date to be entered.
+
+- Selecting a number not corresponding to a filter or entering a letter or symbol prompts user select one of the given options.
+
+- Selecting a row which is not present in the list promts the user to select a valid row to update.
+
+- Selecting a number not corresponding to a document status or entering a letter or symbol prompts user select one of the given options.
+
+- Entering a character not matching the given options will prompt the user to pick one of the given options. Lower case letters y/n are accepted.
 
 ## Validation
 All code has been run through the [PEP8](http://pep8online.com) online checker to validate the Python code.
