@@ -33,22 +33,9 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 
 ### Existing features
 - Generate new rows in worksheet - "New"
-
 - Update status and date of existing rows in worksheet
 - Print tabular views of all documents currently in worksheet
 
-- Accepts user input
-    - Numbered options where there are multiple, fixed choices
-    - Any letters of certain lengths for first- and last names
-    - Date in specified format
-    - Yes / No option
-
-- Generates future deadline for next follow up
-- Input validation and error checking:
-    - Numbered options: You can only enter the numbers specified as options. No out of range numbers, letter or symbols are accepted.
-    - First- and last names: You must enter letters only and 2-15 characters for first- and last names respectively.
-    - Dates: Must be entered in specified format YYYY-MM-DD, no alternative format is accepted.
-    - Yes/No: Must be entered
 
 ### Future Features
 
@@ -70,6 +57,30 @@ The intended audience is anyone working with spreadsheet document tracking in cl
         - Result: The application uses numbered options where possible to reduce the amount of typing for the user.
     - Request: Have available data presented to me.
         - Result: The user can choose the option "Status" which prints a tabulated data to the terminal, giving an overview of the available data from the worksheet. The option "Update" also prints tabulated data based on user's preferred filter.
+
+## Application Testing
+- The menu input option checks for valid user input and prompts the user to input a valid choice if one is not entered:
+    - Invalid number chosen:
+    ![Invalid Data]()
+
+- Entering user name containing symbols or numbers prompt user to enter an alphabetic name:
+![Invalid data]()
+- Entering user name less than 2 or more than 15 characters prompts the user to enter a name of valid length:
+![Invalid data]()
+- Selecting a number not corresponding to a role or entering a letter or symbol prompts user select one of the given options:
+![Invalid Data]()
+- Entering a start date that is in the future prompts the user to enter a valid start date:
+![Invalid Data]()
+- Entering a start date the is more than 15 days in the part (i.e. deadline has already passed) warns the user that deadline has passed but allowd the date to be entered:
+![Note!]()
+- Selecting a number not corresponding to a filter or entering a letter or symbol prompts user select one of the given options:
+![Invalid]()
+- Selecting a row which is not present in the list promts the user to select a valid row to update:
+![Invalid]()
+- Selecting a number not corresponding to a document status or entering a letter or symbol prompts user select one of the given options:
+![Invalid]()
+- Entering a character not matching the given options will prompt the user to pick one of the given options. Lower case letters y/n are accepted:
+![Invalid]()
 
 
 ## Data model
