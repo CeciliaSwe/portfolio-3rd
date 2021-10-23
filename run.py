@@ -25,11 +25,11 @@ def input_action():
     Returns variable user_input with the chosen action
     """
     while True:
-        print("Please select action:\n")
+        print("\nPlease select action:\n")
         print("1 : New      To generate new rows in Doc Tracking")
         print("2 : Update   Update status of existing row in Doc Tracking")
         print("3 : Status   Print existing rows with status in Doc Tracking")
-        print("4 : Exit\n")
+        print("4 : Exit     Stop running application\n")
         user_input = input("Action: \n")
         options = ["1", "2", "3", "4"]
 
@@ -125,7 +125,7 @@ def input_new_date():
     Returns the date string provided.
     """
     while True:
-        print("\nPlease enter start date:\n")
+        print("\nPlease enter start date for this action:\n")
         print("Use date format YYYY-MM-DD:")
         print("For example 2021-10-22:\n")
         new_date = input("Date \n")
@@ -155,7 +155,7 @@ def add_doc_rows(data, worksheet):
     Updates the relevant worksheet with the data provided and prints out
     statement to user with action taken and completed.
     """
-    print(f"Adding staff and documents to {worksheet} worksheet...\n")
+    print(f"Adding staff and documents rows to {worksheet} worksheet...\n")
     for row in data:
         worksheet_to_update = SHEET.worksheet(worksheet)
         worksheet_to_update.append_row(row)
@@ -171,7 +171,7 @@ def request_update_by():
     """
     while True:
 
-        print("Please chose filter:\n")
+        print("\nPlease choose filter:\n")
         print("1 : Role         Returns list filtered by selected role")
         print("2 : Deadline     Returns list filtered by deadline < 7 days")
         print("3 : All          Returns full list of rows in Doc Tracking\n")
@@ -212,7 +212,6 @@ def row_number_input(option):
         row_number = int(input("Row number:\n"))
 
         if validate_user_input(row_number, option):
-            print("Thank you!\n")
             break
     return row_number
 
@@ -228,8 +227,8 @@ def update_status_input():
     """
 
     while True:
-        print("\nPlease indicate new document status:")
-        print("Document default status is 'Planned':\n")
+        print("\nPlease indicate new document status.")
+        print("Document default status is 'Planned'.\n")
         print("1 : Sent         Document template has been sent")
         print("2 : Requested    Document has been requested")
         print("3 : Complete     Completed document has been recevied \n")
@@ -237,7 +236,6 @@ def update_status_input():
         options = ["1", "2", "3"]
 
         if validate_user_input(new_status, options):
-            print("Thank you!\n")
             break
 
     if new_status == "1":
@@ -380,14 +378,14 @@ def update_doc_status(worksheet, option_list):
 
 def run_again_input():
     """
-    Requests user to chose if they want to perform another action or stop
+    Requests user to choose if they want to perform another action or stop
     running the application.
     Calls function to validate that user input matched the given options.
     Uses a while loop to keep running until input is valid. Accepts uppercase
     and lowercase letters for Y/N.
     """
     while True:
-        print("Do you want to perform another action?\n")
+        print("\nDo you want to perform another action?\n")
         options = ["Y", "y", "N", "n"]
         answer = input("Y/N \n")
 
@@ -408,7 +406,10 @@ def run_again():
     if answer == "Y" or answer == "y":
         main()
     elif answer == "N" or answer == "n":
-        print("Bye, thank you, come again")
+        print("Thank you for using Document Tracking!")
+        print("...exiting")
+        print("exit complete")
+        raise SystemExit
 
 
 def validate_name_input(fname, lname):
@@ -419,25 +420,25 @@ def validate_name_input(fname, lname):
     """
     try:
         if fname.isalpha() and lname.isalpha():
-            print("Names are valid")
+            print("\nThank you!\n")
         else:
             raise ValueError(
                 "First name and last name must consist of letters only"
             )
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        print(f"\nInvalid data: {e}, please try again.\n")
         return False
 
     try:
         if (len(fname) >= 2 and len(fname) <= 15) and (len(lname) >= 2 and len(lname) <= 15):
-            print("Names are correct length")
+            pass
         else:
             raise ValueError(
                 "Name must be 2 - 15 characters long"
             )
 
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        print(f"\nInvalid data: {e}, please try again.\n")
         return False
 
     return True
@@ -452,9 +453,9 @@ def validate_date_input(date):
 
     try:
         if datetime.datetime.strptime(date, "%Y-%m-%d"):
-            print("Thank you!")
+            print("\nThank you!\n")
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        print(f"\nInvalid data: {e}, please try again.\n")
         return False
 
     return True
@@ -467,13 +468,13 @@ def validate_user_input(user_input, options):
     """
     try:
         if user_input in options:
-            print("Thank you!")
+            print("\nThank you!\n")
         else:
             raise ValueError(
                 "You need to pick one of the given options"
             )
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        print(f"\nInvalid data: {e}, please try again.\n")
         return False
 
     return True
@@ -496,7 +497,7 @@ def validate_time_delta(date):
                 "Date cannot be in the future"
             )
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        print(f"\nInvalid data: {e}, please try again.\n")
         return False
 
     return True
@@ -523,7 +524,6 @@ def main():
             print_all()
             update_doc_status("doc_collection")
     elif user_input == "3":
-        print("Printed status here")
         print_all()
     elif user_input == "4":
         print("...exiting")
