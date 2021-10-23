@@ -300,11 +300,12 @@ def print_list_deadline():
             filtered_rows.append(row)
 
     sorted_rows = sorted(filtered_rows, key=lambda x: x[7])
-    print(tabulate(sorted_rows))
+    print("\n'Days' indicate number of days until deadline.")
+    print("Negative value for 'Days' indicates deadline has passed.\n")
+    print(tabulate(sorted_rows, headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc", "Days"]))
     option_list = []
     for row in sorted_rows:
         option_list.append(row[0])
-    print(option_list)
     return option_list
 
 
@@ -340,8 +341,9 @@ def list_all():
 
 def print_all():
     all_rows = list_all()
-
-    print(tabulate(all_rows))
+    print("\n'Days' indicate number of days until deadline.")
+    print("Negative value for 'Days' indicates deadline has passed.\n")
+    print(tabulate(all_rows[1:], headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc", "Days"]))
 
 
 def add_row_number():
