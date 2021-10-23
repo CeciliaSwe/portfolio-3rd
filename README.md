@@ -32,9 +32,18 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 ## Features
 
 ### Existing features
-- Generate new rows in worksheet - "New"
-- Update status and date of existing rows in worksheet
-- Print tabular views of all documents currently in worksheet
+
+#### Generate new rows in worksheet
+- Based on user input for first name, last name, role and date, new rows are generated. Different roles have different document type requirements.
+- Based on user input for start date, a deadline date 15 days ahead is calculated and added to she worksheet.
+![Main](assets/images/doc_tracking_start.jpg)
+
+#### Update status and date of existing rows in worksheet
+- Based on user input, tabulated lists are printed. These are filtered by role, by deadline in less than 7 or all existing rows.
+- Based on user input, document status and new deadline for follow up is updated in the worksheet.
+
+### Overview status of all rows
+- The status option allows the user to see a tabulated list of all existing rows in the worksheet for overview.
 
 
 ### Future Features
