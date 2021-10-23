@@ -2,42 +2,75 @@
 
 ## Intro
 
-Ultimate document tracking is a Python Terminal application which runs in the Code Institute mock terminal on Heroku.
+Document tracking is a Python Terminal application which runs in the Code Institute mock terminal on Heroku.
 
-The application is intended for Document tracking for various roles within Pharmaceutical Clinical Trials and users can use the application to facilitate document tracking in gspread by adding all rows applicable for the given input.
+The application is intended for Document tracking for various site staff roles within Pharmaceutical Clinical Trials and can be used to facilitate document tracking in gspread by adding rows applicable for the given input.
 
 The live site can be found [here](https://portfolio-3rd.herokuapp.com/)
 
 
 ## Design
 
+### Application Workflow
+Below is a high level overview of the workflow through the application.
+
 ![Code Logic Flow Chart](assets/images/flowchart-p3.png)
 
+### User Stories
+-  __As a user of the application, I want to be able to:__
+    - Add new site staff and have applicable documents with corresponding rows added to my gspread worksheet.
+    - Get the follow up deadline calculated and presented to me.
+    - Update existing rows woth a new status and have a new deadline calculated and presented to me.
+    - Have an intuitive UI that makes it clear what operations I can perform and what input is expected from me.
+    - Make chioices and enter input quickly, without having to type more than neccesary.
+    - Have available data presented to me.
 
-## Audience
+
+### Audience
 The intended audience is anyone working with spreadsheet document tracking in clinical trials and would benefit from an automated process of adding and updating the sheet.
 
 ## Features
 
 ### Existing features
-* Generate new rows in worksheet
-* Update status and date of existing rows in worksheet
-* Print tabular views of all documents currently in worksheet
+- Generate new rows in worksheet - "New"
 
-* Accepts user input
-    * Numbered options where there are multiple, fixed choices
-    * Any letters of certain lengths for first- and last names
-    * Date in specified format
-    * Yes / No option
+- Update status and date of existing rows in worksheet
+- Print tabular views of all documents currently in worksheet
 
-* Generates future deadline for next follow up
-* Input validation and error checking:
-    * Numbered options: You can only enter the numbers specified as options. No out of range numbers, letter or symbols are accepted.
-    * First- and last names: You must enter letters only and 2-15 characters for first- and last names respectively.
-    * Dates: Must be entered in specified format YYYY-MM-DD, no alternative format is accepted.
-    * Yes/No: Must be entered
+- Accepts user input
+    - Numbered options where there are multiple, fixed choices
+    - Any letters of certain lengths for first- and last names
+    - Date in specified format
+    - Yes / No option
+
+- Generates future deadline for next follow up
+- Input validation and error checking:
+    - Numbered options: You can only enter the numbers specified as options. No out of range numbers, letter or symbols are accepted.
+    - First- and last names: You must enter letters only and 2-15 characters for first- and last names respectively.
+    - Dates: Must be entered in specified format YYYY-MM-DD, no alternative format is accepted.
+    - Yes/No: Must be entered
 
 ### Future Features
+
+## Testing
+
+###
+# Testing
+## User Story Testing
+-  __User Features Requested:__
+    - Request: Add new site staff and have applicable documents with corresponding rows added to my gspread worksheet.
+        - Result: The user can choose the option "New", enter the new site staff data (name, role and start date) and have their worksheet upated with corresponding rows for each required document.
+    - Request: Get the follow up deadline calculated and presented to me.
+        - Result: The application automatically returns a deadline calculated as the start date plus 15 days. It is printed tp the terminal and added to each new row in the worksheet.
+    - Request: Update existing rows woth a new status and have a new deadline calculated and presented to me.
+        - Result: The user can choose the option "Update", filter by role, by deadline or see all existing rows in the worksheet, and update the status of a chosen row. A new deadline will automatically be calculated and presented.
+    - Request: Have an intuitive UI that makes it clear what operations I can perform and what input is expected from me.
+        - Result: The application has a clear menu and user prompts, presenting each option (where applicable) with a short explanation. Abbreviations which are not immediately clear are explained.
+    - Request: Make choices and enter input quickly, without having to type more than neccesary.
+        - Result: The application uses numbered options where possible to reduce the amount of typing for the user.
+    - Request: Have available data presented to me.
+        - Result: The user can choose the option "Status" which prints a tabulated data to the terminal, giving an overview of the available data from the worksheet. The option "Update" also prints tabulated data based on user's preferred filter.
+
 
 ## Data model
 
