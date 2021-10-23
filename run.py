@@ -28,9 +28,10 @@ def input_action():
         print("Please select action:\n")
         print("1 : New      To generate new rows in Doc Tracking")
         print("2 : Update   Update status of existing row in Doc Tracking")
-        print("3 : Status   Print existing rows with status in Doc Tracking\n")
+        print("3 : Status   Print existing rows with status in Doc Tracking")
+        print("4 : Exit\n")
         user_input = input("Action: \n")
-        options = ["1", "2", "3"]
+        options = ["1", "2", "3", "4"]
 
         if validate_user_input(user_input, options):
             break
@@ -524,6 +525,10 @@ def main():
     elif user_input == "3":
         print("Printed status here")
         print_all()
+    elif user_input == "4":
+        print("...exiting")
+        print("exit complete")
+        raise SystemExit
     run_again()
 
 
