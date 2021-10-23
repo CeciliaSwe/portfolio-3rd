@@ -276,8 +276,7 @@ def print_list_deadline():
             filtered_rows.append(row)
 
     sorted_rows = sorted(filtered_rows, key=lambda x: x[7])
-    for row in sorted_rows:
-        print(*row)
+    print(tabulate(sorted_rows))
 
 
 def list_all():
