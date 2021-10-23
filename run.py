@@ -205,6 +205,11 @@ def request_update_role():
 
 
 def row_number_input(option):
+    """
+    Requests the user to select row to update from the list.
+    Calls function to validate the user input based on the row numbers.
+    Uses a while loop to keep running until input is valid.
+    """
 
     while True:
         print("\nPlease select row number to update")
@@ -259,7 +264,8 @@ def print_list_role():
     print(update_role)
     if update_role == "3":
         filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
-        print(tabulate(filtered_list_sc, headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
+        print(tabulate(filtered_list_sc, headers=[
+            "Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
         option_list = []
         for row in filtered_list_sc:
             option_list.append(row[0])
@@ -267,7 +273,8 @@ def print_list_role():
         return option_list
     elif update_role == "1":
         filtered_list_pi = list(filter(lambda x: "PI" in x, all_rows))
-        print(tabulate(filtered_list_pi, headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
+        print(tabulate(filtered_list_pi, headers=[
+            "Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
         option_list = []
         for row in filtered_list_pi:
             option_list.append(row[0])
@@ -275,7 +282,8 @@ def print_list_role():
         return option_list
     elif update_role == "2":
         filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
-        print(tabulate(filtered_list_subi, headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
+        print(tabulate(filtered_list_subi, headers=[
+            "Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
         option_list = []
         for row in filtered_list_subi:
             option_list.append(row[0])
@@ -301,7 +309,11 @@ def print_list_deadline():
     sorted_rows = sorted(filtered_rows, key=lambda x: x[7])
     print("\n'Days' indicate number of days until deadline.")
     print("Negative value for 'Days' indicates deadline has passed.\n")
-    print(tabulate(sorted_rows, headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc", "Days"]))
+    print(
+        tabulate(sorted_rows, headers=[
+            "Row", "F-name", "L-name", "Role", "Deadline",
+            "Status", "Doc", "Days"
+            ]))
     option_list = []
     for row in sorted_rows:
         option_list.append(row[0])
@@ -323,7 +335,9 @@ def list_all():
     for row in all_rows[1:]:
         date_list.append(row[4])
 
-    converted_date_list = [datetime.datetime.strptime(date, '%Y-%m-%d').date() for date in date_list]
+    converted_date_list = [
+        datetime.datetime.strptime(
+            date, '%Y-%m-%d').date() for date in date_list]
     diff_days = []
     today = datetime.date.today()
     for date in converted_date_list:
@@ -339,10 +353,20 @@ def list_all():
 
 
 def print_all():
+    """
+    Prints tabulated list of all existing rows from she worksheet.
+    Includes headers and deadline
+    """
     all_rows = list_all()
     print("\n'Days' indicate number of days until deadline.")
     print("Negative value for 'Days' indicates deadline has passed.\n")
-    print(tabulate(all_rows[1:], headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc", "Days"]))
+    print(tabulate(all_rows[1:], headers=[
+        "Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc", "Days"]
+        ))
+    option_list = []
+    for row in all_rows[1:]:
+        option_list.append(row[0])
+    return option_list
 
 
 def add_row_number():
@@ -430,7 +454,8 @@ def validate_name_input(fname, lname):
         return False
 
     try:
-        if (len(fname) >= 2 and len(fname) <= 15) and (len(lname) >= 2 and len(lname) <= 15):
+        if (len(fname) >= 2 and len(fname) <= 15) and (
+                len(lname) >= 2 and len(lname) <= 15):
             pass
         else:
             raise ValueError(
@@ -521,8 +546,8 @@ def main():
             option_list = print_list_deadline()
             update_doc_status("doc_collection", option_list)
         elif update_filter == "3":
-            print_all()
-            update_doc_status("doc_collection")
+            option_list = print_all()
+            update_doc_status("doc_collection", option_list)
     elif user_input == "3":
         print_all()
     elif user_input == "4":
