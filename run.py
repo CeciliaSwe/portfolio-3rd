@@ -203,6 +203,19 @@ def request_update_role():
     return update_role
 
 
+def row_number_input(option):
+
+    while True:
+        print("\nPlease select row number to update")
+
+        row_number = int(input("Row number:\n"))
+
+        if validate_user_input(row_number, option):
+            print("Thank you!\n")
+            break
+    return row_number
+
+
 def update_status_input():
 
     """
@@ -247,16 +260,27 @@ def print_list_role():
     print(update_role)
     if update_role == "3":
         filtered_list_sc = list(filter(lambda x: "SC" in x, all_rows))
-        print(tabulate(filtered_list_sc))
-        return filtered_list_sc
+        print(tabulate(filtered_list_sc, headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
+        option_list = []
+        for row in filtered_list_sc:
+            option_list.append(row[0])
+        print(option_list)
+        return option_list
     elif update_role == "1":
         filtered_list_pi = list(filter(lambda x: "PI" in x, all_rows))
-        print(tabulate(filtered_list_pi))
-        return filtered_list_pi
+        print(tabulate(filtered_list_pi, headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
+        option_list = []
+        for row in filtered_list_pi:
+            option_list.append(row[0])
+        print(option_list)
+        return option_list
     elif update_role == "2":
         filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
-        print(tabulate(filtered_list_subi))
-        return filtered_list_subi
+        print(tabulate(filtered_list_subi, headers=["Row", "F-name", "L-name", "Role", "Deadline", "Status", "Doc"]))
+        option_list = []
+        for row in filtered_list_subi:
+            option_list.append(row[0])
+        return option_list
 
 
 def print_list_deadline():
@@ -277,6 +301,11 @@ def print_list_deadline():
 
     sorted_rows = sorted(filtered_rows, key=lambda x: x[7])
     print(tabulate(sorted_rows))
+    option_list = []
+    for row in sorted_rows:
+        option_list.append(row[0])
+    print(option_list)
+    return option_list
 
 
 def list_all():
@@ -325,22 +354,19 @@ def add_row_number():
     all_rows = SHEET.worksheet("doc_collection").get_all_values()
     index = 1
     for row in all_rows:
-        row.insert(0, f"Row # {index}")
+        row.insert(0, index)
         index = index + 1
     return all_rows
 
 
-def update_doc_status(worksheet):
+def update_doc_status(worksheet, option_list):
     """
     Request user input on what row to update and calls function for new
     document status. Updates corresponding row and columns 4 and 5 with new
     status and new calculated deadline.
     """
-    print("\nPlease select row number to update")
-    row_number = input("Row number:\n")
-
+    row_number = row_number_input(option_list)
     new_status = update_status_input()
-
     new_date = input_new_date()
     new_deadline = calc_deadline(new_date)
     worksheet_to_update = SHEET.worksheet(worksheet)
@@ -485,11 +511,11 @@ def main():
     elif user_input == "2":
         update_filter = request_update_by()
         if update_filter == "1":
-            print_list_role()
-            update_doc_status("doc_collection")
+            option_list = print_list_role()
+            update_doc_status("doc_collection", option_list)
         elif update_filter == "2":
-            print_list_deadline()
-            update_doc_status("doc_collection")
+            option_list = print_list_deadline()
+            update_doc_status("doc_collection", option_list)
         elif update_filter == "3":
             print_all()
             update_doc_status("doc_collection")
