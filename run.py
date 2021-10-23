@@ -81,17 +81,19 @@ def create_rows():
     new_role = input_role()
 
     if new_role == "1":
-            new_role = "PI"
+        new_role = "PI"
     elif new_role == "2":
-            new_role = "Sub-I"
+        new_role = "Sub-I"
     elif new_role == "3":
-            new_role = "SC"
+        new_role = "SC"
 
     new_date = input_new_date()
     deadline_date = calc_deadline(new_date)
 
     first_new_row = []
-    first_new_row.extend((new_fname, new_lname, new_role, deadline_date, "Planned"))
+    first_new_row.extend(
+        (new_fname, new_lname, new_role, deadline_date, "Planned")
+        )
     second_new_row = first_new_row.copy()
     third_new_row = first_new_row.copy()
     first_new_row.append("CV")
