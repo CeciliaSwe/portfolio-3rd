@@ -33,10 +33,25 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 
 ### Existing features
 
+#### Main menu
+- Presents user with available options with explanations. Validates input and provides user feedback for invalid data.
+![Main](assets/images/doc_tracking_start.png)
+
 #### Generate new rows in worksheet
-- Based on user input for first name, last name, role and date, new rows are generated. Different roles have different document type requirements.
-- Based on user input for start date, a deadline date 15 days ahead is calculated and added to she worksheet.
-![Main](assets/images/doc_tracking_start.jpg)
+- Requests user input for first name, last name, role and start date, and validates all provided input. Provides user feedback for invalid data.
+![Input name and role](assets/images/new_enter_role.png)
+
+- Based on user input for start date, a deadline date of start date + 15 days is calculated.
+![Input date](assets/images/new_enter_date.png)
+
+- Based on user input, new rows are generated in the worksheet. Different roles have different document type requirements.
+![Input date](assets/images/worksheet_update_screenshot.png)
+
+- Feedback is provided in the terminal listing the calculated deadline, details of rows added and explanation of used abbreviations.
+
+- Requests user to chose whether to perform another action or close application.
+![Input date](assets/images/new_final_feedback_another_action.png)
+
 
 #### Update status and date of existing rows in worksheet
 - Based on user input, tabulated lists are printed. These are filtered by role, by deadline in less than 7 or all existing rows.
