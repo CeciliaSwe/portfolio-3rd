@@ -29,7 +29,7 @@ Below is a high-level overview of the workflow through the application.
 
 
 ### Audience
-The intended audience is anyone working with spreadsheet document tracking in clinical trials and would benefit from an automated process of adding and updating the sheet.
+The intended audience is anyone working with spreadsheet document tracking for site staff in clinical trials and would benefit from an automated process of adding and updating the sheet.
 
 ## Features
 
@@ -38,6 +38,7 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 #### Main menu:
 
 Presents the user with available options with explanations. Validates input and provides user feedback for invalid data.
+
 ![Main](assets/images/doc_tracking_start.png)
 
 #### Generate new rows in the worksheet:
@@ -54,7 +55,7 @@ Based on user input, new rows are generated in the worksheet. Different roles ha
 
 ![Input date](assets/images/worksheet_update_screenshot.png)
 
-Feedback is provided in the terminal listing the calculated deadline, details of rows added and explanation of used abbreviations.
+Feedback is provided in the terminal; listing the calculated deadline, details of the added rows and explanation of used abbreviations.
 
 ![New Feedback](assets/images/new_final_feedback_another_action.png)
 
@@ -65,22 +66,22 @@ The user is requested to choose whether to perform another action or close the a
 
 #### Update status and date of existing rows in the worksheet:
 Based on user input, tabulated lists are printed.
-These are filtered by role:
+These can be filtered by role:
 
 ![Print role](assets/images/update_filter_role.png)
 
 ![Print role](assets/images/update_print_role.png)
 
-by deadline in less than 7 days (explanation indicates that negative values for deadline days mean that the deadline is already overdue.):
+They can be deadline in less than 7 days (explanation indicates that negative values for deadline days mean that the deadline is already overdue.):
 
 ![Print deadline](assets/images/update_print_deadline.png)
 
-or all existing rows:
+Or all existing rows can be displayed:
 
 ![Print all](assets/images/update_print_all.png)
 
-Based on user input, document status and new date; deadline for follow-up is updated in the worksheet and feedback is printed to the terminal.
-
+Based on user input for new document status and new date; deadline for follow-up is updated in the worksheet and feedback is printed to the terminal.
+![Update Status Date](assets/images/update_status_date.png)
 ![Update feedback](assets/images/update_final_feedback.png)
 
 ### Overview status of all rows
