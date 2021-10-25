@@ -123,12 +123,16 @@ All code has been run through the [PEP8](http://pep8online.com) online checker t
 - [Git](https://gitforwindows.org/)
 - [Heroku](https://heroku.com)
 - [Lucidcharts](https://www.lucidchart.com/)
+    - Used to create the flow chart.
 - [Google Cloud Platform](https://cloud.google.com/)
 - [Google Sheets](https://www.google.com/sheets/about/)
+    - The online spreadsheet.
 - [GSpread API Reference](https://docs.gspread.org/en/latest/api.html)
-    - The API reference for the GSpread library for Python. It provides an easy interface for working with Google Sheets from code.
+    - The API reference for the GSpread library for Python. Required for the GSpread worksheet connection.It provides an easy interface for working with Google Sheets from code.
 - [Tabulate](https://pypi.org/project/tabulate/)
-- [Datetime](https://docs.python.org/3/search.html?q=datetime&check_keywords=yes&area=default)
+    - Required to print tabular data in nicely formatted tables for improved UI.
+- [Datetime, including timedelta](https://docs.python.org/3/search.html?q=datetime&check_keywords=yes&area=default)
+    - Required to convert date to string and vice versa, and to calculate deadlines.
 
 
 
