@@ -30,7 +30,7 @@ As a user of the application, I want to be able to:
 - Have available data presented to me.
 
 ### Audience
-The intended audience is anyone working with spreadsheet document tracking for site staff in clinical trials and would benefit from an automated process of adding and updating the sheet.
+The intended audience is anyone working with spreadsheet document tracking for site staff in clinical trials and would benefit from an automated process of adding rows to and updating the sheet.
 
 ### Differences to design
 
@@ -63,7 +63,7 @@ Based on user input, new rows are generated in the worksheet. Different roles ha
 
 ![Input date](assets/images/worksheet_update_screenshot.png)
 
-Feedback is provided in the terminal; listing the calculated deadline, details of the added rows and explanation of used abbreviations.
+Feedback is provided in the terminal, listing the calculated deadline, details of the added rows, and an explanation of used abbreviations.
 
 ![New Feedback](assets/images/new_final_feedback_another_action.png)
 
@@ -169,7 +169,7 @@ All code has been run through the [PEP8](http://pep8online.com) online checker t
 The application user enters data directly in the terminal based on input prompts. The initial data is appended to a list of strings, manipulated, (for example additional list items added based on user inputs) and stored in separate rows in the connected Gspread spreadsheet.
 From the spreadsheet, data is pulled and manipulated (for example row numbers are added) and presented back to the user in the terminal via tabulated print statements.
 
-When data in the spreadsheet is to be updated, data is pulled from the sheet, manipulated based on user input (for example, row to update, new document status), and added back to the spreadsheet.
+When data in the spreadsheet is to be updated, data is pulled from the sheet, manipulated based on user input (for example row to update, new document status), and added back to the spreadsheet.
 
 ##### Return to [top](#document-tracking)
 
