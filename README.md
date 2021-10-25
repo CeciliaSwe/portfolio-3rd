@@ -31,6 +31,11 @@ Below is a high-level overview of the workflow through the application.
 ### Audience
 The intended audience is anyone working with spreadsheet document tracking for site staff in clinical trials and would benefit from an automated process of adding and updating the sheet.
 
+### Differences to design
+
+- Printing of rows from the worksheet to the terminal uses tabulate instead of pprint. Tabulate presents the data in more clear way.
+- Deadline for follow-up is still calculated if status is set to complete. Setting a completion date without deadline calculation may be implemented in future updates.
+
 ##### Return to [top](#document-tracking)
 
 ## Features
@@ -92,6 +97,11 @@ Based on user input for new document status and new date; deadline for follow-up
 ![Status print](assets/images/status_print.png)
 
 ### Future Features
+
+- Add a more detailed set of documents for each user.
+- Add notifications for approaching deadlines.
+- Remove calculation of a new deadline date if document status is set to complete.
+
 
 ##### Return to [top](#document-tracking)
 
