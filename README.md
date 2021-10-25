@@ -12,7 +12,6 @@ The live site can be found [here](https://portfolio-3rd.herokuapp.com/)
 
 A full list of technologies used can be found in the technologies section of this document. Note that GitHub as of March 2021 automatically creates a Table of Contents for the README file.
 
-
 ## Design
 
 ### Application Workflow
@@ -29,9 +28,10 @@ Below is a high-level overview of the workflow through the application.
     - Make choices and enter input quickly, without having to type more than necessary.
     - Have available data presented to me.
 
-
 ### Audience
 The intended audience is anyone working with spreadsheet document tracking for site staff in clinical trials and would benefit from an automated process of adding and updating the sheet.
+
+##### Return to [top](#document-tracking)
 
 ## Features
 
@@ -93,6 +93,8 @@ Based on user input for new document status and new date; deadline for follow-up
 
 ### Future Features
 
+##### Return to [top](#document-tracking)
+
 ## Testing
 
 ### User Story Testing
@@ -150,6 +152,7 @@ Input validation matrix can be found [here](assets/images/input_validation_matri
 All code has been run through the [PEP8](http://pep8online.com) online checker to validate the Python code. No issues were found.
 ![PEP8 validation](assets/images/pep8_validation_portfolio-3rd.png)
 
+##### Return to [top](#document-tracking)
 
 ## Data model
 The application user enters data directly in the terminal based on input prompts. The initial data is appended to a list of strings, manipulated, (for example additional list items added based on user inputs) and stored in separate rows in the connected Gspread spreadsheet.
@@ -157,6 +160,7 @@ From the spreadsheet, data is pulled and manipulated (for example row numbers ar
 
 When data in the spreadsheet is to be updated, data is pulled from the sheet, manipulated based on user input (for example, row to update, new document status), and added back to the spreadsheet.
 
+##### Return to [top](#document-tracking)
 
 ## Technologies
 
@@ -186,7 +190,7 @@ When data in the spreadsheet is to be updated, data is pulled from the sheet, ma
 - [Am I Responsive?](http://ami.responsivedesign.is/)
 	* Used to generate the screenshots for responsive design.
 
-
+##### Return to [top](#document-tracking)
 
 ## Bugs & Fixes
 - Calculated deadline could not be inserted in the worksheet, solved by converting the date back to string format before insertion  [Reference](https://github.com/burnash/gspread/issues/511)
@@ -196,6 +200,7 @@ abbreviation before adding it to the list to be inserted into the worksheet.
 
 - Validation for the row number did not work, solved by converting number input to integer before comparing to list of available row numbers.
 
+##### Return to [top](#document-tracking)
 
 ## Deployment
 
@@ -266,6 +271,8 @@ This will create a duplicate of the full project in your GitHub Repository.
     - Automatic Deployment: This will prompt Heroku to re-build your app each time you push your code to GitHub.
     - Manual Deployment: This will only prompt Heroku to build your app when you manually tell it to do so.
 6. Ensure the correct branch is selected "master/Main", and select the deployment method that you desire. In this case, I will be using Automatic Deployment.
+
+##### Return to [top](#document-tracking)
 
 ## Credits
 
