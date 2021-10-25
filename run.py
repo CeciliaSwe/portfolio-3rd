@@ -276,7 +276,6 @@ def print_list_role():
         option_list = []
         for row in filtered_list_sc:
             option_list.append(row[0])
-        print(option_list)
         return option_list
     elif update_role == "1":
         filtered_list_pi = list(filter(lambda x: "PI" in x, all_rows))
@@ -285,7 +284,6 @@ def print_list_role():
         option_list = []
         for row in filtered_list_pi:
             option_list.append(row[0])
-        print(option_list)
         return option_list
     elif update_role == "2":
         filtered_list_subi = list(filter(lambda x: "Sub-I" in x, all_rows))
