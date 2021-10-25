@@ -20,13 +20,14 @@ Below is a high-level overview of the workflow through the application.
 ![Code Logic Flow Chart](assets/images/flowchart-p3.png)
 
 ### User Stories
--  __As a user of the application, I want to be able to:__
-    - Add new site staff and have applicable documents with corresponding rows added to my gspread worksheet.
-    - Get the follow-up deadline calculated and presented to me.
-    - Update existing rows with a new status and have a new deadline calculated and presented to me.
-    - Have an intuitive UI that makes it clear what operations I can perform and what input is expected from me.
-    - Make choices and enter input quickly, without having to type more than necessary.
-    - Have available data presented to me.
+As a user of the application, I want to be able to:
+
+- Add new site staff and have applicable documents with corresponding rows added to my gspread worksheet.
+- Get the follow-up deadline calculated and presented to me.
+- Update existing rows with a new status and have a new deadline calculated and presented to me.
+- Have an intuitive UI that makes it clear what operations I can perform and what input is expected from me.
+- Make choices and enter input quickly, without having to type more than necessary.
+- Have available data presented to me.
 
 ### Audience
 The intended audience is anyone working with spreadsheet document tracking for site staff in clinical trials and would benefit from an automated process of adding and updating the sheet.
@@ -126,8 +127,6 @@ Based on user input for new document status and new date; deadline for follow-up
 
 For testing, every path and option was navigated to ensure they give the expected result and validation of each user input is working.
 
-Input validation matrix can be found [here](assets/images/input_validation_matrix.png)
-
 - All inputs require data; empty input data will generate an error message.
 
 - Selecting main menu option:
@@ -157,6 +156,8 @@ Input validation matrix can be found [here](assets/images/input_validation_matri
 
 - Selecting whether to perform another action:
     - Entering a character not matching the given options will prompt the user to pick one of the given options. Lower case letters y/n are accepted.
+
+Input validation matrix: ![Input validation matrix](assets/images/input_validation_matrix.png)
 
 ### Validation
 All code has been run through the [PEP8](http://pep8online.com) online checker to validate the Python code. No issues were found.
