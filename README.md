@@ -2,7 +2,7 @@
 
 ## Intro
 
-Document tracking is a Python Terminal application which runs in the Code Institute mock terminal on Heroku.
+Document tracking is a Python Terminal application that runs in the Code Institute mock terminal on Heroku.
 
 The application is intended for Document tracking for various site staff roles within Pharmaceutical Clinical Trials and can be used to facilitate document tracking in gspread by adding rows applicable for the given input.
 
@@ -12,7 +12,7 @@ The live site can be found [here](https://portfolio-3rd.herokuapp.com/)
 ## Design
 
 ### Application Workflow
-Below is a high level overview of the workflow through the application.
+Below is a high-level overview of the workflow through the application.
 
 ![Code Logic Flow Chart](assets/images/flowchart-p3.png)
 
@@ -84,30 +84,44 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 
 ## Application Testing
 
-For testing, print statements were used heavily during the coding of the application. Once finished, every paths was navigated to ensure they gave the expected result and validation of each user input was working.
+For testing, every paths and option was navigated to ensure they give the expected result and validation of each user input is working.
 
-- The menu input option checks for valid user input and prompts the user to input a valid choice if one is not entered
+Input validation matrix can be found [here](assets/images/input_validation_matrix.png)
 
-- Entering user name containing symbols or numbers prompt user to enter an alphabetic name.
+- All inputs require data; empty input data will generate an error message.
 
-- Entering user name less than 2 or more than 15 characters prompts the user to enter a name of valid length.
+- Selecting main menu option:
+    - Selecting a number from the main menu not corresponding to an option or entering a letter or symbol prompts user select one of the given options.
 
-- Selecting a number not corresponding to a role or entering a letter or symbol prompts user select one of the given options.
+- Entering new names:
+    - Entering user name containing symbols or numbers prompt user to enter a name consisting of letters only. For the purpose of this project, characters such as hyphens are not allowed.
 
-- Entering a start date that is in the future prompts the user to enter a valid start date.
+    - Entering a new name of invalid length prompts the user to enter a name of valid length. For the purpose of this project, first name and last name must be 2-15 letters respectively.
 
-- Entering a start date the is more than 15 days in the part (i.e. deadline has already passed) warns the user that deadline has passed but allowd the date to be entered.
+- Selecting role option:
+    - Selecting a number not corresponding to a role option or entering a letter or symbol prompts user select one of the given options.
 
-- Selecting a number not corresponding to a filter or entering a letter or symbol prompts user select one of the given options.
+- Entering date:
+    - Entering a start date that is in the future prompts the user to enter a valid start date.
 
-- Selecting a row which is not present in the list promts the user to select a valid row to update.
+    - Entering a start date the is more than 15 days in the part (i.e. deadline has already passed) warns the user that deadline has passed but allows the date to be entered.
 
-- Selecting a number not corresponding to a document status or entering a letter or symbol prompts user select one of the given options.
+-  Selecting filter option:
+    - Selecting a number not corresponding to a filter or entering a letter or symbol prompts user select one of the given options.
 
-- Entering a character not matching the given options will prompt the user to pick one of the given options. Lower case letters y/n are accepted.
+- Selecting row to update:
+    - Selecting a row which is not present in the printed list promts the user to select a valid row to update.
+
+- Selection new status:
+    - Selecting a number not corresponding to a document status or entering a letter or symbol prompts user select one of the given options.
+
+- Selecting whether to perform another action:
+    - Entering a character not matching the given options will prompt the user to pick one of the given options. Lower case letters y/n are accepted.
 
 ## Validation
-All code has been run through the [PEP8](http://pep8online.com) online checker to validate the Python code.
+All code has been run through the [PEP8](http://pep8online.com) online checker to validate the Python code. No issues found.
+![PEP8 validation](assets/images/pep8_validation_portfolio-3rd.png)
+
 
 ## Data model
 
@@ -138,13 +152,49 @@ All code has been run through the [PEP8](http://pep8online.com) online checker t
 
 
 ## Bugs & Fixes
-- Calculated deadline could not be inserted in worksheet, solved by converting the date back to string format before insertion (https://github.com/burnash/gspread/issues/511)
+- Calculated deadline could not be inserted in worksheet, solved by converting the date back to string format before insertion  [Reference](https://github.com/burnash/gspread/issues/511)
 - After updating user choice input to numbers (instead of typing out the role abbreviation) for choosing a role, the number was added to worksheet instead of the role. Solved by converting the role variable back to role abbreviation before adding it to the list to be inserted to the worksheet.
+- Validation for row number did not work, solved by converting number input to integer before comparing to list of available row numbers.
 
 
 ## Deployment
 
-### Creating App
+### Project Creation
+The project was created using the CI Gitpod Python Essentials template
+1. Navigate to CI Gitpod Full Template [here](https://github.com/Code-Institute-Org/python-essentials-template) and click the 'Use this template' button.
+2. Enter chosen repository name, then click "Create repository from template".
+3. Navigate to the new repository on GitHub and click the Gitpod button to build the workspace.
+4. The following commands were used for version control throughout the project:
+
+- git add filename - to add files to the staging area before committing.
+- git commit -m "commit message" - to commit changes to the local repository.
+- git push - to push committed changes to the GitHub repository.
+
+5. The creds.json file was added to gitignore to prevent sensitive data to be pushed to GitHub.
+
+### Local Deployment/Clone
+As described on [GitHub Docs](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
+1. Navigate to the GitHub Repository main page,
+2. Above the list of files, click the Code drop down menu.
+3. To clone the repository using HTTPS, under "Clone with HTTPS", click the icon. To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click Use SSH, then click the icon. To clone a repository using GitHub CLI, click Use GitHub CLI, then click the icon.
+4. Open Terminal.
+5. Change the current working directory to the location where you want the cloned directory.
+6. Type git clone, and then paste the URL you copied earlier.
+7. Press Enter to create your local clone.
+
+
+### Fork project
+This is used to propose changes to someone else's project or to use someone else's project as a starting point for your own idea.
+
+1. Navigate to the GitHub Repository you want to fork.
+2. On the top right of the page under the header, click "Fork".
+
+This will create a duplicate of the full project in your GitHub Repository.
+
+### Remote Deployment Heroku
+
+#### Creating App
 
 1. To import the required dependencies to the requirements.txt file, type the following in the terminal:
     > pip3 freeze > requirements.txt
@@ -154,7 +204,7 @@ All code has been run through the [PEP8](http://pep8online.com) online checker t
 6. Provide a name for your application (this needs to be unique) and select your region.
 7. Click "Create App".
 
-### Update settings
+#### Update settings
 
 1. Navigate to "Settings" and scroll down to "config vars".
 2. For the first row: for key: type "CREDS" and for value: copy and paste the content of the creds.json file. Click "add".
@@ -163,7 +213,7 @@ All code has been run through the [PEP8](http://pep8online.com) online checker t
 5. Click "build packs" and then add both "python" and "node.js" - in that particular order.
 
 
-### App Deployment
+#### App Deployment
 
 1. Navigate to the "Deploy" section.
 2. Scroll down to "Deployment Method" and select "GitHub".
