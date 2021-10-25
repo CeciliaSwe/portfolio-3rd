@@ -2,13 +2,15 @@
 
 ![Screenshot](assets/images/screenshots.png)
 
-## Intro
+## Purpose
 
 Document tracking is a Python Terminal application that runs in the Code Institute mock terminal on Heroku.
 
 The application is intended for Document tracking for various site staff roles within Pharmaceutical Clinical Trials and can be used to facilitate document tracking in gspread by adding rows applicable for the given input and by updating existing rows with new status and deadline.
 
 The live site can be found [here](https://portfolio-3rd.herokuapp.com/)
+
+A full list of technologies used can be found in the technologies section of this document. Note that GitHub as of March 2021 automatically creates a Table of Contents for the README file.
 
 
 ## Design
@@ -165,8 +167,11 @@ When data in the spreadsheet is to be updated, data is pulled from the sheet, ma
 ### Other Technologies and Libraries
 
 - [GitHub](https://github.com/)
-- [Git](https://gitforwindows.org/)
+	- GithHub is the hosting site used to store the source code for the Website.
+- [GitPod](https://gitpod.io/)
+    - GitPod is used as version control software to commit and push code to the GitHub repository where the source code is stored.
 - [Heroku](https://heroku.com)
+    - Heroku is used for the deployment of the live application.
 - [Lucidcharts](https://www.lucidchart.com/)
     - Used to create the flow chart.
 - [Google Cloud Platform](https://cloud.google.com/)
@@ -178,13 +183,17 @@ When data in the spreadsheet is to be updated, data is pulled from the sheet, ma
     - Required to print tabular data in nicely formatted tables for improved UI.
 - [Datetime, including timedelta](https://docs.python.org/3/search.html?q=datetime&check_keywords=yes&area=default)
     - Required to convert date to string and vice versa, and to calculate deadlines.
-
+- [Am I Responsive?](http://ami.responsivedesign.is/)
+	* Used to generate the screenshots for responsive design.
 
 
 
 ## Bugs & Fixes
 - Calculated deadline could not be inserted in the worksheet, solved by converting the date back to string format before insertion  [Reference](https://github.com/burnash/gspread/issues/511)
-- After updating user choice input to numbers (instead of typing out the role abbreviation) for choosing a role, the number was added to the worksheet instead of the role. Solved by converting the role variable back to role abbreviation before adding it to the list to be inserted into the worksheet.
+
+- After updating user choice input to numbers (instead of typing out the role abbreviation) for choosing a role, the number was added to the worksheet instead of the role. Solved by converting the role variable back to role
+abbreviation before adding it to the list to be inserted into the worksheet.
+
 - Validation for the row number did not work, solved by converting number input to integer before comparing to list of available row numbers.
 
 
@@ -260,6 +269,7 @@ This will create a duplicate of the full project in your GitHub Repository.
 
 ## Credits
 
+### Code
 All code has been custom written for this project, except for the scope and constant variables (from the Love Sandwiches walkthrough project, as the Gspread set up was identical) and the basis for the while loop and user input validation (also from the Love Sandwiches walkthrough project, but customized for each function and purpose in this project).
 
 Other inspiration and tutorials are credited as per below:
@@ -273,11 +283,10 @@ Other inspiration and tutorials are credited as per below:
 
 - How to convert dates to strings and vice versa [Datestring convertions](https://stackabuse.com/converting-strings-to-datetime-in-python/)
 
-- While loop and user input validation:
-    - The basis for the while loop for user input and the corresponding validation function was taken from the Love Sandwiches walkthrough project. The code has been customized for the intented validation purposes for this project.
+### Acknowledgements
+To my Mentor [Chris Quinn](https://github.com/10xOXR) for guidance and pushing me to make smart choices.
 
-- Scope and constant variables:
-    - Scope and constant variables were taken from the Love Sandwiches walkthrough project as the Gspread set-up was identical.
+##### Return to [top](#document-tracking)
 
 
 
