@@ -1,4 +1,6 @@
-# Ultimate Document Tracking
+# Document Tracking
+
+![Screenshot](assets/images/screenshots.png)
 
 ## Intro
 
@@ -147,6 +149,11 @@ All code has been run through the [PEP8](http://pep8online.com) online checker t
 
 
 ## Data model
+The application user enters data directly in the terminal based on input prompts. The initial data is appended to a list of strings, manipulated (for example: additional list items added based on user inputs) and stored in separate rows in the connected Gspread spreadsheet.
+From the spreadsheet, data is pulled and manipulated (for example, row numbers are added) and presented back to the user in the terminal via tabulated print statements.
+
+When data in the spreadsheet is to be updated, data is pulled from the sheet, manipulated basen on user iput (for example, row to update, new document status), and added back to the spreadsheet.
+
 
 ## Technologies
 
