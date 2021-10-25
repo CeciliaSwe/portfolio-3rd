@@ -4,7 +4,7 @@
 
 Document tracking is a Python Terminal application that runs in the Code Institute mock terminal on Heroku.
 
-The application is intended for Document tracking for various site staff roles within Pharmaceutical Clinical Trials and can be used to facilitate document tracking in gspread by adding rows applicable for the given input.
+The application is intended for Document tracking for various site staff roles within Pharmaceutical Clinical Trials and can be used to facilitate document tracking in gspread by adding rows applicable for the given input and by updating existing rows with new status and deadline.
 
 The live site can be found [here](https://portfolio-3rd.herokuapp.com/)
 
@@ -65,9 +65,7 @@ The intended audience is anyone working with spreadsheet document tracking in cl
 
 ## Testing
 
-###
-# Testing
-## User Story Testing
+### User Story Testing
 -  __User Features Requested:__
     - Request: Add new site staff and have applicable documents with corresponding rows added to my gspread worksheet.
         - Result: The user can choose the option "New", enter the new site staff data (name, role and start date) and have their worksheet upated with corresponding rows for each required document.
@@ -82,7 +80,7 @@ The intended audience is anyone working with spreadsheet document tracking in cl
     - Request: Have available data presented to me.
         - Result: The user can choose the option "Status" which prints a tabulated data to the terminal, giving an overview of the available data from the worksheet. The option "Update" also prints tabulated data based on user's preferred filter.
 
-## Application Testing
+### Application Testing
 
 For testing, every paths and option was navigated to ensure they give the expected result and validation of each user input is working.
 
@@ -118,7 +116,7 @@ Input validation matrix can be found [here](assets/images/input_validation_matri
 - Selecting whether to perform another action:
     - Entering a character not matching the given options will prompt the user to pick one of the given options. Lower case letters y/n are accepted.
 
-## Validation
+### Validation
 All code has been run through the [PEP8](http://pep8online.com) online checker to validate the Python code. No issues found.
 ![PEP8 validation](assets/images/pep8_validation_portfolio-3rd.png)
 
